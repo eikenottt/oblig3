@@ -5,6 +5,7 @@ public class GameMaster {
     private Player player1;
     private Player player2;
     private int position;
+    private final Integer[] GOAL = {0,7};
 
     public GameMaster() {
 
