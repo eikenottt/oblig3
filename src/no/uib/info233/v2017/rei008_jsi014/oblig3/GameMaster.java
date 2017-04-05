@@ -6,33 +6,33 @@ public class GameMaster {
     private Player player2;
     private int position;
 
-    public GameMaster(){
+    public GameMaster() {
 
     }
 
-    public GameMaster getGameMaster(){
+    public GameMaster getGameMaster() {
 
         return new GameMaster();
 
     }
 
-    public void setPlayers(Player player1, Player player2){
+    public void setPlayers(Player player1, Player player2) {
 
     }
 
-    public void startGame(){
+    public void startGame() {
 
     }
 
-    public void listenToPlayerMove(Player player, int move){
+    public void listenToPlayerMove(Player player, int move) {
 
     }
 
-    public void evaluateTurn(){
+    public void evaluateTurn() {
 
     }
 
-    public void updateRanking(){
+    public void updateRanking() {
 
     }
 

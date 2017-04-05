@@ -14,9 +14,7 @@ public abstract class Player {
     public void registerGameMaster(GameMaster gameMaster) {
     }
 
-    public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) {
-
-    }
+    public abstract void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy);
 
     public void gameOver(float earnedPoints) {
 
@@ -34,7 +32,7 @@ public abstract class Player {
         return energy;
     }
 
-    public void setEnergy(int energy) {
-        this.energy = energy;
+    public void setEnergy() {
+        this.energy = (int)Math.floor(Math.random() * 100);
     }
 }
