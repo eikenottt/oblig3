@@ -1,3 +1,79 @@
-Da funke
+Klasser:
+    GameMaster
+    Player -> //TODO 2 Subklasser ->
+                    for å ha forskjellige strategier i makeNextMove()
 
-Da funke, men funka da?
+Metoder:
+    GM:
+        GameMaster() ->
+
+        //TODO getGameMaster(): GameMaster ->
+            Brukes for å koble spillerene til en arena
+
+        //TODO setPlayers(Player player1, Player player2) ->
+            Setter to spillere til arenaen
+
+        //TODO startGame() ->
+            Sender beskjed til begge spillerene om at de skal gjøre sitt trekk
+
+        //TODO listenToPlayerMove(Player player, int move) ->
+            Her mottar GM hvor mye energi spillerene skal bruke på neste trekk
+            om energien er en bokstav eller negativt tall blir energien satt til
+            0
+
+        //TODO evaluateTurn() ->
+            Bruker informasjonen fra listenToPlayerMove() for å finne en vinner
+            oppdaterer deretter på hvilken posisjon spillerene befinner seg i
+            ved å kalle player.makeNextMove eller player.gameOver()
+            Om spillet er slutt blir også updateRanking() kjørt
+
+        //TODO updateRanking() ->
+            Sender SQL spørring til server for å oppdatere tabellen ranking med
+            navn på spiller og poengsummen.
+            Om tabellen ikke finnes fra før, lag den med spesifikasjonene under
+            seksjon "Tabell" nederst på siden.
+
+    P:
+        //TODO Player(String name) ->
+            Setter navn på spilleren
+
+        //TODO registerGameMaster(GameMaster gameMaster) ->
+            henter gameMaster som holder styr på stillingen og posisjonen
+
+        //TODO makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) ->
+            Her skal strategien til spilleren utformes.
+            forslag til strategier ->
+
+            player1:
+                Energien som skal brukes regnes ut fra hvordan stillingen er i spillet
+                til punktet denne blir kjørt. Om denne spilleren er like unna et tap,
+                skal spilleren bruke mer energi.
+                Om spilleren er nær seier bruker den mindre energi for å ikke gå tom
+
+            player2:
+                Energien regnes ut fra hvor mye energi den andre spilleren har igjen.
+                Om denne spilleren har mer energi enn motstanderen, og ligger ann
+                til å vinne, brukes mer energi for å sikre seier.
+
+            kjør gameMaster.listenToPlayerMove() for å gi beskjed om valget
+
+        //TODO gameOver(float earnedPoints)
+
+Variabler:
+    GM:
+        Player player1 -> holder på spiller 1
+        Player player2 -> holder på spiller 2
+        int currentPosition -> viser til hvilket felt i arenaen spillerene er
+        ArrayList<Player> ranking ->
+                Her kan navnet og poengene til spilleren hentes
+
+    P:
+        GameMaster gameMaster -> holder på arenaen spilleren er på
+        int energy -> holder på energien til spilleren
+        String name -> holder på navnet til spilleren
+
+//TODO Tabell:
+    "ranking" ->
+        kolonner:
+            - "player" (VARCHAR128) -> Player name
+            - "score" (FLOAT) -> Player earnedPoints

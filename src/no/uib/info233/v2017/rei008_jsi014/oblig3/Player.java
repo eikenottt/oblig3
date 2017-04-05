@@ -4,8 +4,8 @@ package no.uib.info233.v2017.rei008_jsi014.oblig3;
 public abstract class Player {
 
     private String name;
-    private float earnedPoints;
     private int energy;
+    private GameMaster gameMaster;
 
     public Player(String name) {
         this.name = name;
@@ -28,14 +28,6 @@ public abstract class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public float getEarnedPoints() {
-        return earnedPoints;
-    }
-
-    public void setEarnedPoints(float earnedPoints) {
-        this.earnedPoints = earnedPoints;
     }
 
     public int getEnergy() {
