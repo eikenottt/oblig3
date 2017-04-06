@@ -9,9 +9,11 @@ public abstract class Player {
 
     public Player(String name) {
         this.name = name;
+        setEnergy();
     }
 
     public void registerGameMaster(GameMaster gameMaster) {
+        this.gameMaster = gameMaster;
     }
 
     public abstract void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy);
@@ -24,15 +26,11 @@ public abstract class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getEnergy() {
         return energy;
     }
 
-    public void setEnergy() {
+    private void setEnergy() {
         this.energy = (int)Math.floor(Math.random() * 100);
     }
 }

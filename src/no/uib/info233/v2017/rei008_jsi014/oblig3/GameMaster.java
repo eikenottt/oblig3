@@ -5,10 +5,11 @@ public class GameMaster {
     private Player player1;
     private Player player2;
     private int position;
-    private final Integer[] GOAL = {0,7};
+    private final Integer[] GOAL;
 
     public GameMaster() {
-
+        position = 3;
+        GOAL = new Integer[]{0,7};
     }
 
     public GameMaster getGameMaster() {
@@ -18,7 +19,8 @@ public class GameMaster {
     }
 
     public void setPlayers(Player player1, Player player2) {
-
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public void startGame() {
@@ -41,23 +43,12 @@ public class GameMaster {
         return player1;
     }
 
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
     public Player getPlayer2() {
         return player2;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
     }
 
     public int getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
 }

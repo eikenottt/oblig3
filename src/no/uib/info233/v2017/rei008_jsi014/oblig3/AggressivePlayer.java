@@ -1,9 +1,9 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
 
-public class AgressivePlayer extends Player {
+public class AggressivePlayer extends Player {
 
-    public AgressivePlayer(String name) {
+    public AggressivePlayer(String name) {
         super(name);
     }
 
