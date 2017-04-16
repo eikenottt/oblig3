@@ -1,21 +1,24 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
 
-public class GameMaster {
+import java.util.ArrayList;
+
+public final class GameMaster {
+    private static final GameMaster GAMEMASTER = new GameMaster();
     private Player player1;
     private Player player2;
     private int position;
     private final Integer[] GOAL;
+    private ArrayList<Player> ranking;
 
-    public GameMaster() {
+    private GameMaster() {
         position = 3;
         GOAL = new Integer[]{0,7};
+        ranking = new ArrayList<>();
     }
 
-    public GameMaster getGameMaster() {
-
-        return new GameMaster();
-
+    public static GameMaster getGameMaster() {
+        return GAMEMASTER;
     }
 
     public void setPlayers(Player player1, Player player2) {
