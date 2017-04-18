@@ -4,6 +4,7 @@ package no.uib.info233.v2017.rei008_jsi014.oblig3;
 import java.util.ArrayList;
 
 public final class GameMaster {
+
     private static final GameMaster GAMEMASTER = new GameMaster();
     private Player player1;
     private Player player2;
@@ -21,7 +22,7 @@ public final class GameMaster {
         return GAMEMASTER;
     }
 
-    public void setPlayers(Player player1, Player player2) {9
+    public void setPlayers(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
@@ -36,8 +37,12 @@ public final class GameMaster {
 
     }
 
-    public void listenToPlayerMove(Player player, int move) {
-
+    public int listenToPlayerMove(Player player, int move) {
+        int energyAvailable = player.getEnergy();
+        if ((move > energyAvailable) || (move < 0)) {
+            move = 0;
+        }
+        return move;
     }
 
     public void evaluateTurn() {
@@ -46,14 +51,6 @@ public final class GameMaster {
 
     public void updateRanking() {
 
-    }
-
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
     }
 
     public int getPosition() {
