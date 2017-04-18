@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public final class GameMaster {
 
-    private static final GameMaster GAMEMASTER = new GameMaster();
+    public static final GameMaster GAMEMASTER = new GameMaster();
     private Player player1;
     private Player player2;
     private int position;
