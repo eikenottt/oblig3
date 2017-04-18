@@ -21,12 +21,18 @@ public final class GameMaster {
         return GAMEMASTER;
     }
 
-    public void setPlayers(Player player1, Player player2) {
+    public void setPlayers(Player player1, Player player2) {9
         this.player1 = player1;
         this.player2 = player2;
     }
 
     public void startGame() {
+        Boolean start = true;
+            while(start){
+              //  player1.makeNextMove(this.getPosition(), player1.getEnergy(), player2.getEnergy()) <-- burde returnere int?
+                // this.listenToPlayerMove(player1, int move);
+
+            }
 
     }
 
