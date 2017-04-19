@@ -31,6 +31,14 @@ public abstract class Player {
     }
 
     private void setEnergy() {
-        this.energy = (int)Math.floor(Math.random() * 100);
+        this.energy = 100;
+    }
+
+    public GameMaster getGameMaster() {
+        return gameMaster;
+    }
+
+    protected void updateEnergy(int usedEnergy){
+        this.energy += usedEnergy;
     }
 }

@@ -8,6 +8,9 @@ public final class GameMaster {
     public static final GameMaster GAMEMASTER = new GameMaster();
     private Player player1;
     private Player player2;
+    private int player1EnergyUse;
+    private int player2EnergyUse;
+
     private int position;
     private final Integer[] GOAL;
     private ArrayList<Player> ranking;
@@ -28,8 +31,8 @@ public final class GameMaster {
     }
 
     public void startGame() {
-        Boolean start = true;
-            while(start){
+        //Boolean start = true;
+            //while(start){
               //  player1.makeNextMove(this.getPosition(), player1.getEnergy(), player2.getEnergy()) <-- burde returnere int?
                 // this.listenToPlayerMove(player1, int move);
 
@@ -37,12 +40,23 @@ public final class GameMaster {
 
     }
 
-    public int listenToPlayerMove(Player player, int move) {
-        int energyAvailable = player.getEnergy();
-        if ((move > energyAvailable) || (move < 0)) {
-            move = 0;
+    public void listenToPlayerMove(Player player, int energyUse) {
+        if(!gameOver) {
+
+            System.out.println(player.getName() + " is using " + energyUse + " energy to swing his sword!");
+
+            if(player.equals(player1)) {
+                this.player1EnergyUse = energyUse;
+            } else {
+                this.player2EnergyUse = energyUse;
+            }
+        } else {
+            evaluateTurn();
         }
-        return move;
+
+        if(this.player1EnergyUse > -1 && this.player2EnergyUse > -1) {
+            evaluateTurn();
+        }
     }
 
     public void evaluateTurn() {
