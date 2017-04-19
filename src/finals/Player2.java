@@ -1,11 +1,11 @@
 package finals;
 
 /**
- * Class Player, manages player moves
+ * Class Player2, manages player moves
  * @author tny034
  *
  */
-public class Player {
+public class Player2 {
 	
 	private String name;
 	private int currentPosition;
@@ -16,13 +16,11 @@ public class Player {
 	/**
 	 * Constructor for player
 	 * @param name name
-	 * @param currentPosition currentPosition
-	 * @param currentEnergy currentEnergy
 	 */
-	public Player(String name, int currentPosition, int currentEnergy) {
+	public Player2(String name) {
 		this.name = name;
-		this.currentPosition = currentPosition;
-		this.currentEnergy = currentEnergy;
+		this.currentPosition = 3;
+		this.currentEnergy = 100;
 	}
 	
 	/**
@@ -42,7 +40,7 @@ public class Player {
 	 * @param yourEnergy player energy
 	 * @param opponentEnergy opponent energy
 	 */
-	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) {
+	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
 	}
 	
 	/**
@@ -52,6 +50,7 @@ public class Player {
 	public void gameOver(float earnedPoints) {
 		//TODO: informs the player that the game has come to an
 		// end and how many points he earned in the game
+		System.out.println(getGameMaster().getPlayerName(this) + " earned " + earnedPoints + " points!");
 		gameMaster.setGameOver(true);
 	}
 	
@@ -98,7 +97,15 @@ public class Player {
 	public GameMaster getGameMaster() {
 		return gameMaster;
 	}
-	
+
+	/**
+	 *
+	 * @param currentEnergy
+	 */
+	public void setCurrentEnergy(int currentEnergy) {
+		this.currentEnergy = currentEnergy;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,7 +122,7 @@ public class Player {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Player other = (Player) obj;
+		Player2 other = (Player2) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;

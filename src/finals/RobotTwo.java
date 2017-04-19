@@ -1,24 +1,20 @@
 package finals;
 
 /**
- * Subclass RobotTwo, extends Player
+ * Subclass RobotTwo, extends Player2
  * A different kind of strategy based robot
  * @author tny034
  *
  */
-public class RobotTwo extends Player{
+public class RobotTwo extends Player2 {
 
-	public RobotTwo(String name, int currentPosition, int currentEnergy) {
-		super(name, currentPosition, currentEnergy);
+	public RobotTwo(String name) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) {
-		
-		if(currentPosition <= 0) {
-			gameOver(currentPosition);
-		}
+	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
 		
 		int energyUsage = 0;
 		
@@ -37,6 +33,6 @@ public class RobotTwo extends Player{
 		}	
 		
 		adjustEnergy(-energyUsage);
-		getGameMaster().listenToPlayerMover(this, energyUsage);
+		getGameMaster().listenToPlayerMove(this, energyUsage);
 	}
 }

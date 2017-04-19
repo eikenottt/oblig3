@@ -8,24 +8,18 @@ import java.util.Random;
  * @author tny034
  *
  */
-public class RobotOne extends Player {
+public class RobotOne extends Player2 {
 
 	/**
 	 * Constructor for subclass RobotOne
 	 * @param name name
-	 * @param currentPosition currentPosition
-	 * @param currentEnergy currentEnergy
 	 */
-	public RobotOne(String name, int currentPosition, int currentEnergy) {
-		super(name, currentPosition, currentEnergy);
+	public RobotOne(String name) {
+		super(name);
 	}
 	
 	@Override
-	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) {
-		
-		if (currentPosition <= 0) {
-			gameOver(currentPosition);
-		}
+	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
 		
 		int energyUsage = 0;
 		
@@ -42,7 +36,7 @@ public class RobotOne extends Player {
 		}
 			
 		adjustEnergy(-energyUsage);
-		getGameMaster().listenToPlayerMover(this, energyUsage);
+		getGameMaster().listenToPlayerMove(this, energyUsage);
 	}
 	
 	/**
