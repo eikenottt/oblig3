@@ -135,4 +135,39 @@ public class Player {
 			return false;
 		return true;
 	}
+
+    protected int overheadSwing(int yourEnergy){
+        int randNumber;
+        randNumber = rand.nextInt(15);
+
+        if(yourEnergy > 35){
+            return 20 + randNumber;
+        }else {
+            return getCurrentEnergy();
+        }
+    }
+
+    protected int stab(int yourEnergy){
+
+        int randNumber;
+        randNumber = this.rand.nextInt(50);
+
+        if (yourEnergy > 50){
+            return randNumber;
+        }else if(yourEnergy>11){
+            return randNumber/10 + 1;
+        }else{
+            return 0;
+        }
+    }
+    protected int slash(int yourEnergy){
+
+        int randNumber = this.rand.nextInt(15);
+        if (yourEnergy > 20) {
+            return 5 + randNumber;
+        }else if( yourEnergy >= 5){
+            return 5;
+        }else return 0;
+
+    }
 }

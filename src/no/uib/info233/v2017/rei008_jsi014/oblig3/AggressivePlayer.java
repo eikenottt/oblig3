@@ -10,9 +10,37 @@ public class AggressivePlayer extends Player {
     }
 
     @Override
-    public void makeNextMove(int CurrentPosition, int yourEnergy, int opponentEnergy) {
-
+    public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) {
+        System.out.println(yourEnergy);
+        int randMove = rand.nextInt(4);
         int useEnergy;
+        switch (currentPosition){
+            case 0: case 1: case 2:
+                useEnergy=overheadSwing(yourEnergy);
+                break;
+            case 3: case 4:
+                if (randMove == 0 || randMove == 1){
+                    useEnergy=stab(yourEnergy);
+                }else{
+                    useEnergy=overheadSwing(yourEnergy);
+                }
+                break;
+            case 5: case 6:
+                if(randMove == 3){
+                    useEnergy=slash(yourEnergy);
+                }else{
+                    useEnergy=stab(yourEnergy);
+                }
+                break;
+            default:
+                useEnergy = 0;
+                break;
+
+        }
+        this.updateEnergy(-useEnergy);
+        this.getGameMaster().listenToPlayerMove(this, useEnergy);
+
+/*        int useEnergy;
         if (yourEnergy > 50){
             useEnergy = 45;
         }else{
@@ -20,42 +48,9 @@ public class AggressivePlayer extends Player {
         }
 
         this.updateEnergy(-useEnergy);
-        this.getGameMaster().listenToPlayerMove(this, useEnergy);
+        this.getGameMaster().listenToPlayerMove(this, useEnergy);*/
     }
 
-    private int overheadSwing(int yourEnergy){
-        int randNumber;
-        randNumber = rand.nextInt(15);
 
-        if(yourEnergy < 35){
-            return 20 + randNumber;
-        }else {
-            return getCurrentEnergy();
-        }
-    }
-
-    private int stab(int yourEnergy){
-
-        int randNumber;
-        randNumber = this.rand.nextInt(50);
-
-        if (yourEnergy > 50){
-            return randNumber;
-        }else if(yourEnergy>11){
-            return randNumber/10 + 1;
-        }else{
-            return 0;
-        }
-    }
-    private int slash(int yourEnergy){
-
-        int randNumber = this.rand.nextInt(15);
-            if (yourEnergy > 20) {
-                return 5 + randNumber;
-            }else if( yourEnergy >= 5){
-                return 5;
-            }else return 0;
-
-    }
 }
 
