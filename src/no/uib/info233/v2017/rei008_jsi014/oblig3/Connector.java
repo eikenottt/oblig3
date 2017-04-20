@@ -1,7 +1,5 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
-import finals.Player2;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,7 +30,7 @@ public class Connector {
         return null;
     }
 
-    public void updateRanking(Player2 player, float score) throws Exception {
+    public void updateRanking(Player player, float score) throws Exception {
         float prevScore;
         statement = getConnection().prepareStatement("SELECT score FROM ranking WHERE player = '"+player.getName()+"'");
         result = statement.executeQuery();
