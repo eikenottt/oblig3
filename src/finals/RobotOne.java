@@ -20,14 +20,16 @@ public class RobotOne extends Player2 {
 	
 	@Override
 	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
-		
+
+		super.makeNextMove(currentPosition, yourEnergy, opponentEnergy);
+
 		int energyUsage = 0;
-		
+
 		if(yourEnergy > 0) {
 			if (currentPosition <= 3) {
-				energyUsage = 30;
+				energyUsage = chaos()/3;
 			} else if (currentPosition > 3) {
-				energyUsage = chaos();
+				energyUsage = chaos()/2;
 			}
 		}
 		

@@ -10,37 +10,56 @@ import java.util.ArrayList;
  *
  */
 public class GameMaster {
-	
+
+	// Sets the different colors used in String
+	private static final String RESET_COLOR = "\u001B[0m";
+	private static final String CYAN = "\u001B[36m";
+	private static final String RED = "\u001B[31m";
+	private static final String BLUE = "\u001B[34m";
+	private static final String GREEN = "\u001B[32m";
+	private static final String YELLOW = "\u001B[33m";
+
+	// The Players
 	private Player2 playerBlue;
 	private Player2 playerRed;
-	private final ArrayList<Integer> GOAL;
 
+	// ArrayList containing the two positions where the game ends
+	private final ArrayList<Integer> GOAL = new ArrayList<>(2);
+
+	// Players energy use
 	private int p1_energyUse;
 	private int p2_energyUse;
+
+	// Color representation of the player name. Set by the getPlayerName method
 	private String playerBlueName;
 	private String playerRedName;
 
+	// Game Master
 	private static GameMaster instance = new GameMaster();
 
+	// Determines the state of the game
 	private boolean gameOver;
 
-	private Connector connector = new Connector();
-
-	int playerHasRun = 0;
+	// Is made to see if both players did run the listenToPlayerMove method
+	private int playerHasRun = 0;
 
 	/**
 	 * Constructor for GameMaster
-	 * Sets a couple of values
+	 * Sets the energyUse for both players
+	 * and the positions where the games ends
 	 */
 	private GameMaster() {
 		gameOver = false;
 		p1_energyUse = -1;
 		p2_energyUse = -1;
-		GOAL = new ArrayList<>(2);
 		GOAL.add(0);
 		GOAL.add(6);
 	}
-	
+
+	/**
+	 * Returns the GameMaster instance
+	 * @return GameMaster
+	 */
 	public static GameMaster getGameMaster() {
 		return instance;
 	}
@@ -59,8 +78,8 @@ public class GameMaster {
 	
 	/**
 	 * Sends a message to each other players to come up with
-	 * their next move. This is done by running player for
-	 * for each player.
+	 * their next move. This is done by running the Player's method
+	 * makeNextMove for each player.
 	 */
 	public void startGame() throws Exception {
 		System.out.println(playerBlueName + " vs " + playerRedName + "\n");
@@ -145,6 +164,7 @@ public class GameMaster {
 			this.p1_energyUse = -1;
 			this.p2_energyUse = -1;
 
+
 			try {
 				playerBlue.makeNextMove(playerBlue.getCurrentPosition(), playerBlue.getCurrentEnergy(), playerRed.getCurrentEnergy());
 				playerRed.makeNextMove(playerRed.getCurrentPosition(), playerRed.getCurrentEnergy(), playerBlue.getCurrentEnergy());
@@ -159,19 +179,22 @@ public class GameMaster {
 	}
 
 	private void updateRanking() {
-		float pointsplayerBlue = getPointsFromPosition(playerBlue.getCurrentPosition());
-		float pointsPlayer2 = getPointsFromPosition(playerRed.getCurrentPosition());
+		// connection to the SQL database
+		Connector connector = new Connector();
+
+		float pointsPlayerBlue = getPointsFromPosition(playerBlue.getCurrentPosition());
+		float pointsPlayerRed = getPointsFromPosition(playerRed.getCurrentPosition());
 
 		System.out.println();
-		System.out.println("--------- \u001B[36mGame Over!\u001B[0m --------- \n");
-		System.out.println("The game ended at X \n" + showPosition(playerBlue.getCurrentPosition()));
-		System.out.println("\u001B[0m");
-		playerBlue.gameOver(pointsplayerBlue);
-		playerRed.gameOver(pointsPlayer2);
+		System.out.println("--------- "+CYAN+"Game Over!"+RESET_COLOR+" --------- \n");
+		System.out.println("The game ended at X \n" + showPosition(playerBlue.getCurrentPosition()) + RESET_COLOR);
+		System.out.println();
+		playerBlue.gameOver(pointsPlayerBlue);
+		playerRed.gameOver(pointsPlayerRed);
 
 		try {
-			connector.updateRanking(playerBlue, pointsplayerBlue);
-			connector.updateRanking(playerRed, pointsPlayer2);
+			connector.updateRanking(playerBlue, pointsPlayerBlue);
+			connector.updateRanking(playerRed, pointsPlayerRed);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -253,15 +276,15 @@ public class GameMaster {
 	private String showPosition(int position) {
 		String x;
 		if(position != 3) {
-			x = "\u001B[32mX\u001B[31m";
+			x = GREEN+"X"+RED;
 		}else if (position == 6) {
-			x = "X\u001B[0m";
+			x = GREEN+"X"+RESET_COLOR;
 		}
 		else {
-			x = "\u001B[0mX\u001B[31m";
+			x = RESET_COLOR+"X"+RED;
 		}
 
-		String[] gameBoard = {"\u001B[34m0","O","O","O","O","O","0"};
+		String[] gameBoard = {BLUE+"0","O","O","O","O","O","0"};
 		gameBoard[position] = x;
 		return String.join("|",gameBoard);
 	}
@@ -269,10 +292,10 @@ public class GameMaster {
 	public String getPlayerName(Player2 player) {
 
 		if(player.getName().equals(playerBlue.getName())) {
-			return "\u001B[34m" + playerBlue.getName() + "\u001B[0m";
+			return BLUE + playerBlue.getName() + RESET_COLOR;
 		}
 		else {
-			return "\u001B[31m" + playerRed.getName() + "\u001B[0m";
+			return YELLOW + playerRed.getName() + RESET_COLOR;
 		}
 	}
 

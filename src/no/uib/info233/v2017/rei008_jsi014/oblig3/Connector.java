@@ -34,13 +34,13 @@ public class Connector {
 
     public void updateRanking(Player2 player, float score) throws Exception {
         float prevScore;
-        statement = getConnection().prepareStatement("SELECT score FROM Syuty.ranking WHERE player = '"+player.getName()+"'");
+        statement = getConnection().prepareStatement("SELECT score FROM ranking WHERE player = '"+player.getName()+"'");
         result = statement.executeQuery();
         while (result.next()) {
             prevScore = result.getFloat(1);
             score += prevScore;
         }
-        statement = getConnection().prepareStatement("REPLACE INTO Syuty.ranking(player, score) VALUES ('"+player.getName()+"', "+score+")");
+        statement = getConnection().prepareStatement("REPLACE INTO ranking(player, score) VALUES ('"+player.getName()+"', "+score+")");
         statement.executeUpdate();
 
     }
@@ -54,10 +54,4 @@ public class Connector {
             String usr = "root";
             String pwr = "root";
 
-    statement = getConnection().prepareStatement("SELECT score FROM ranking WHERE player = '"+player.getName()+"'");
-        result = statement.executeQuery();
-        while (result.next()) {
-            Float x = result.getFloat(1) + score;
-            statement = getConnection().prepareStatement("REPLACE INTO ranking (player, score) VALUES ('"+player.getName()+"', "+x+")");
-        }
 */
