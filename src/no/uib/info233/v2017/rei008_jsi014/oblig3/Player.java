@@ -136,18 +136,18 @@ public class Player {
 		return true;
 	}
 
-    private int overheadSwing(int yourEnergy){
+    protected int overheadSwing(int yourEnergy){
         int randNumber;
         randNumber = rand.nextInt(15);
 
-        if(yourEnergy < 35){
+        if(yourEnergy > 35){
             return 20 + randNumber;
         }else {
             return getCurrentEnergy();
         }
     }
 
-    private int stab(int yourEnergy){
+    protected int stab(int yourEnergy){
 
         int randNumber;
         randNumber = this.rand.nextInt(50);
@@ -160,7 +160,7 @@ public class Player {
             return 0;
         }
     }
-    private int slash(int yourEnergy){
+    protected int slash(int yourEnergy){
 
         int randNumber = this.rand.nextInt(15);
         if (yourEnergy > 20) {
