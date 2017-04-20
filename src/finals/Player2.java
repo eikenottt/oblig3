@@ -41,6 +41,9 @@ public class Player2 {
 	 * @param opponentEnergy opponent energy
 	 */
 	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
+		/*if(gameMaster.isGameOver()) {
+			gameMaster.setGameOver(true);
+		}*/
 	}
 	
 	/**
@@ -51,7 +54,6 @@ public class Player2 {
 		//TODO: informs the player that the game has come to an
 		// end and how many points he earned in the game
 		System.out.println(getGameMaster().getPlayerName(this) + " earned " + earnedPoints + " points!");
-		gameMaster.setGameOver(true);
 	}
 	
 	/**
