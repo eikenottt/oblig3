@@ -72,7 +72,14 @@ public class Player {
 	 * @param value
 	 */
 	public void updatePosition(int value) {
-		this.currentPosition += value;
+		currentPosition += value;
+
+		if (currentPosition > 6){
+			currentPosition = 6;
+		}
+		if(currentPosition < 0 ){
+			currentPosition = 0;
+		}
 	}
 
 	/**

@@ -16,20 +16,20 @@ public class AggressivePlayer extends Player {
         int useEnergy;
         switch (currentPosition){
             case 0: case 1: case 2:
-                useEnergy=overheadSwing(yourEnergy);
+                useEnergy = overheadSwing(yourEnergy);
                 break;
             case 3: case 4:
                 if (randMove == 0 || randMove == 1){
-                    useEnergy=stab(yourEnergy);
+                    useEnergy = stab(yourEnergy);
                 }else{
                     useEnergy=overheadSwing(yourEnergy);
                 }
                 break;
             case 5: case 6:
                 if(randMove == 3){
-                    useEnergy=slash(yourEnergy);
+                    useEnergy = slash(yourEnergy);
                 }else{
-                    useEnergy=stab(yourEnergy);
+                    useEnergy = stab(yourEnergy);
                 }
                 break;
             default:
