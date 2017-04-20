@@ -1,5 +1,7 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
+import java.util.Random;
+
 /**
  * Class Player, manages player moves
  * @author tny034
@@ -10,6 +12,7 @@ public class Player {
 	private String name;
 	private int currentPosition;
 	private int currentEnergy;
+	protected Random rand = new Random();
 	
 	private GameMaster gameMaster;
 	
