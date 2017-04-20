@@ -111,6 +111,11 @@ public class Player {
 		this.currentEnergy = currentEnergy;
 	}
 
+	protected int minusFive(int energy) {
+
+		return energy;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -21,7 +21,7 @@ public final class GameMaster {
 
 	// The Players
 	private static Player playerBlue;
-	private static Player playerYellow;
+	private static Player playerRed;
 
 	// ArrayList containing the two positions where the game ends
 	private final ArrayList<Integer> GOAL = new ArrayList<>(2);
@@ -32,7 +32,7 @@ public final class GameMaster {
 
 	// Color representation of the player name. Set by the getPlayerName method
 	private static String playerBlueName;
-	private static String playerYellowName;
+	private static String playerRedName;
 
 	// Determines the state of the game
 	private boolean gameOver;
@@ -66,13 +66,13 @@ public final class GameMaster {
 	/**
 	 * Assigns the players that are going to play against each other
 	 * @param playerBlue playerBlue
-	 * @param playerYellow playerYellow
+	 * @param playerYellow playerRed
 	 */
 	public static void setPlayers(Player playerBlue, Player playerYellow) {
 		GAMEMASTER.playerBlue = playerBlue;
-		GAMEMASTER.playerYellow = playerYellow;
+		GAMEMASTER.playerRed = playerYellow;
 		playerBlueName = getPlayerName(playerBlue);
-		playerYellowName = getPlayerName(playerYellow);
+		playerRedName = getPlayerName(playerYellow);
 		playerBlue.registerGameMaster(GAMEMASTER);
 		playerYellow.registerGameMaster(GAMEMASTER);
 	}
@@ -84,9 +84,9 @@ public final class GameMaster {
 	 */
 	public static void startGame() throws Exception {
 		setGameOver(false);
-		System.out.println(playerBlueName + " vs " + playerYellowName + "\n");
-		playerBlue.makeNextMove(playerBlue.getCurrentPosition(), playerBlue.getCurrentEnergy(), playerYellow.getCurrentEnergy());
-		playerYellow.makeNextMove(playerYellow.getCurrentPosition(), playerYellow.getCurrentEnergy(), playerBlue.getCurrentEnergy());
+		System.out.println(playerBlueName + " vs " + playerRedName + "\n");
+		playerBlue.makeNextMove(playerBlue.getCurrentPosition(), playerBlue.getCurrentEnergy(), playerRed.getCurrentEnergy());
+		playerRed.makeNextMove(playerRed.getCurrentPosition(), playerRed.getCurrentEnergy(), playerBlue.getCurrentEnergy());
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public final class GameMaster {
 
 			if(getP1_energyUse() > getP2_energyUse()) {
 				this.playerBlue.updatePosition(1);
-				this.playerYellow.updatePosition(-1);
+				this.playerRed.updatePosition(-1);
 				
 				System.out.println(playerBlueName + " won!" + "\n");
 												
@@ -151,13 +151,13 @@ public final class GameMaster {
 			}
 			else {
 				this.playerBlue.updatePosition(-1);
-				this.playerYellow.updatePosition(1);
+				this.playerRed.updatePosition(1);
 				
-				System.out.println(playerYellowName + " won!" + "\n");
+				System.out.println(playerRedName + " won!" + "\n");
 			}
 			
 			System.out.println(playerBlueName + " at position: " + playerBlue.getCurrentPosition());
-			System.out.println(playerYellowName + " at position: " + playerYellow.getCurrentPosition() + "\n");
+			System.out.println(playerRedName + " at position: " + playerRed.getCurrentPosition() + "\n");
 			
 			this.p1_energyUse = -1;
 			this.p2_energyUse = -1;
@@ -167,8 +167,8 @@ public final class GameMaster {
 			}
 
 			try {
-				playerBlue.makeNextMove(playerBlue.getCurrentPosition(), playerBlue.getCurrentEnergy(), playerYellow.getCurrentEnergy());
-				playerYellow.makeNextMove(playerYellow.getCurrentPosition(), playerYellow.getCurrentEnergy(), playerBlue.getCurrentEnergy());
+				playerBlue.makeNextMove(playerBlue.getCurrentPosition(), playerBlue.getCurrentEnergy(), playerRed.getCurrentEnergy());
+				playerRed.makeNextMove(playerRed.getCurrentPosition(), playerRed.getCurrentEnergy(), playerBlue.getCurrentEnergy());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -186,20 +186,20 @@ public final class GameMaster {
 		Connector connector = new Connector();
 
 		float pointsPlayerBlue = getPointsFromPosition(playerBlue.getCurrentPosition());
-		float pointsPlayerRed = getPointsFromPosition(playerYellow.getCurrentPosition());
+		float pointsPlayerRed = getPointsFromPosition(playerRed.getCurrentPosition());
 
 		System.out.println();
 		System.out.println("--------- "+CYAN+"Game Over!"+RESET_COLOR+" --------- \n");
 		System.out.println("The game ended at X \n" + showPosition(playerBlue.getCurrentPosition()) + RESET_COLOR);
 		System.out.println();
 		playerBlue.gameOver(pointsPlayerBlue);
-		playerYellow.gameOver(pointsPlayerRed);
+		playerRed.gameOver(pointsPlayerRed);
 
 		System.out.println("There have been played " + gamesPlayed + " games!");
 
 		try {
 			connector.updateRanking(playerBlue, pointsPlayerBlue);
-			connector.updateRanking(playerYellow, pointsPlayerRed);
+			connector.updateRanking(playerRed, pointsPlayerRed);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -209,7 +209,7 @@ public final class GameMaster {
 	 * @return the gameOver
 	 */
 	public boolean isGameOver() {
-		return (GOAL.contains(playerBlue.getCurrentPosition()) || (playerBlue.getCurrentEnergy() == 0 && playerYellow.getCurrentEnergy() == 0));
+		return (GOAL.contains(playerBlue.getCurrentPosition()) || (playerBlue.getCurrentEnergy() == 0 && playerRed.getCurrentEnergy() == 0));
 	}
 
 	private static void setGameOver(boolean gameOver) {
@@ -286,7 +286,7 @@ public final class GameMaster {
 			return BLUE + playerBlue.getName() + RESET_COLOR;
 		}
 		else {
-			return RED + playerYellow.getName() + RESET_COLOR;
+			return RED + playerRed.getName() + RESET_COLOR;
 		}
 	}
 
