@@ -7,11 +7,11 @@ package finals;
  */
 public class Application {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		GameMaster gameMaster = GameMaster.getGameMaster();
 		
-		RobotOne robot1 = new RobotOne("Burt", 3, 10);
-		RobotTwo robot2 = new RobotTwo("Larry", 3, 100);
+		RobotOne robot1 = new RobotOne("Cato");
+		RobotTwo robot2 = new RobotTwo("Nora");
 		
 		robot1.registerGameMaster(gameMaster);
 		robot2.registerGameMaster(gameMaster);
@@ -19,4 +19,5 @@ public class Application {
 		gameMaster.setPlayers(robot1, robot2);
 		gameMaster.startGame();
 	}
+
 }
