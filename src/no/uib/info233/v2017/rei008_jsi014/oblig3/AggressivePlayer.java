@@ -17,7 +17,7 @@ public class AggressivePlayer extends Player {
             useEnergy = yourEnergy;
         }
 
-        this.updateEnergy(useEnergy);
+        this.updateEnergy(-useEnergy);
         this.getGameMaster().listenToPlayerMove(this, useEnergy);
     }
 }

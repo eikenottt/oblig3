@@ -29,8 +29,8 @@ class PlayerTest {
     }
 
     @Test
-    void makeNextMove() {
-        player1.makeNextMove(gameMaster.getPosition(), player1.getEnergy(), player2.getEnergy());
+    void makeNextMove() throws Exception {
+        player1.makeNextMove(player1.getCurrentPosition(), player1.getCurrentEnergy(), player2.getCurrentEnergy());
     }
 
     @Test
