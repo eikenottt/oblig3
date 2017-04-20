@@ -15,7 +15,13 @@ public class AggressivePlayer extends Player {
         int randMove = rand.nextInt(4);
         int useEnergy;
         switch (currentPosition){
-            case 0: case 1: case 2:
+            case 0: case 1:
+                if (randMove == 0){
+                    useEnergy = whirlwind(yourEnergy);
+                }else
+                    useEnergy = slash(yourEnergy);
+                break;
+            case 2:
                 useEnergy = overheadSwing(yourEnergy);
                 break;
             case 3: case 4:
@@ -26,11 +32,12 @@ public class AggressivePlayer extends Player {
                 }
                 break;
             case 5: case 6:
-                if(randMove == 3){
+                if(randMove == 0){
                     useEnergy = slash(yourEnergy);
-                }else{
+                }else if(randMove == 1){
                     useEnergy = stab(yourEnergy);
-                }
+                }else
+                    useEnergy = whirlwind(yourEnergy);
                 break;
             default:
                 useEnergy = 0;
@@ -49,6 +56,16 @@ public class AggressivePlayer extends Player {
 
         this.updateEnergy(-useEnergy);
         this.getGameMaster().listenToPlayerMove(this, useEnergy);*/
+    }
+
+    private int whirlwind(int yourEnergy){
+        int randNumber = this.rand.nextInt(25);
+        if (yourEnergy >=30){
+            return 5 + randNumber;
+        } else if (yourEnergy > 10){
+            return randNumber;
+        }else
+            return yourEnergy;
     }
 
 

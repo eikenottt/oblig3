@@ -16,7 +16,7 @@ public class Application {
 
 		
 		Player robot1 = new AggressivePlayer("Cato");
-		Player robot2 = new AggressivePlayer("Svein");
+		Player robot2 = new PassivePlayer("Svein");
 		Player robot3 = new AggressivePlayer("Nora");
 		Player robot4 = new AggressivePlayer("Karl");
 
