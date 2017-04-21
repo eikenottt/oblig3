@@ -1,6 +1,14 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
-
+/**
+ * Describes an Passive type player: strategy is to spend a moderate amount of energy in neutral positions,
+ * uses least amount in offence, and the most amount in defence to win games both in offence.
+ * Introduces the special attack swordPoke(), a low energy attack.
+ *
+ * @author rei008
+ * @author jsi014
+ * @version 0,1
+ */
 public class PassivePlayer extends Player {
 
     public PassivePlayer(String name) {

@@ -1,7 +1,14 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
 
-import java.util.Random;
+/**
+ * Describes an Aggressive type player: strategy is to spend a lot of energy to win games both in offence,
+ * and defence. Introduces the special attack whirlWind(), a high energy attack.
+ *
+ * @author rei008
+ * @author jsi014
+ * @version 0,1
+ */
 
 public class AggressivePlayer extends Player {
 

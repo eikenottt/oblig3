@@ -1,6 +1,19 @@
 Weakness
+
+The Singleton-Pattern
+The code in the uses a Singleton pattern, this can often be a bad thing. Singleton patterns tends to increase the coupling between
+the classes. this high coupling might result in the code being more difficult to handle(maintain and making changes). In worst case,
+by making a change in one part of the code, might cause problems throughout the system.
+
+Testability
+The technical specifications in the project have a significant low amount of methods which actually return values. A lot of the working
+of the program runs behind the scenes, which makes it hard to pinpoint an error. Especially makeNextMove, is a big chunk of code, that
+doesen't return a value, it justs sends it to the GameMaster to be handled there.
+
+
+
     - Mange void metoder, dårlig testability
-    -
+    -Singleton HIGH COUPLING BAD
 
 
 
