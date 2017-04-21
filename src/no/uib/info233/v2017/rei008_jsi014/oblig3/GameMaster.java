@@ -3,9 +3,11 @@ package no.uib.info233.v2017.rei008_jsi014.oblig3;
 import java.util.ArrayList;
 
 /**
- * Class GameMaster facilitates game.
- * @author tny034
+ * GameMaster sets up and keeps track of a game between two players
  *
+ * @author rei008
+ * @author jsi014
+ * @version 0.1
  */
 public final class GameMaster {
 
@@ -15,7 +17,6 @@ public final class GameMaster {
 	private static final String RED = "\u001B[31m";
 	private static final String BLUE = "\u001B[34m";
 	private static final String GREEN = "\u001B[32m";
-	private static final String PURPLE = "\u001B[35m";
 
 	private static final GameMaster GAMEMASTER = new GameMaster();
 
@@ -24,7 +25,7 @@ public final class GameMaster {
 	private static Player playerRed;
 
 	// ArrayList containing the two positions where the game ends
-	private final ArrayList<Integer> GOAL = new ArrayList<>(2);
+	private static final ArrayList<Integer> GOAL = new ArrayList<>(2);
 
 	// Players energy use
 	private int p1_energyUse;
@@ -43,7 +44,7 @@ public final class GameMaster {
 
 	/**
 	 * Constructor for GameMaster
-	 * Sets the energyUse for both players
+	 * initializes the energyUse for both players
 	 * and the positions where the games ends
 	 */
 	private GameMaster() {
@@ -56,7 +57,6 @@ public final class GameMaster {
 	}
 
 	/**
-	 * Returns the GameMaster instance
 	 * @return GameMaster
 	 */
 	public static GameMaster getGameMaster() {
@@ -66,21 +66,19 @@ public final class GameMaster {
 	/**
 	 * Assigns the players that are going to play against each other
 	 * @param playerBlue playerBlue
-	 * @param playerYellow playerRed
+	 * @param playerRed playerRed
 	 */
-	public static void setPlayers(Player playerBlue, Player playerYellow) {
+	public static void setPlayers(Player playerBlue, Player playerRed) {
 		GAMEMASTER.playerBlue = playerBlue;
-		GAMEMASTER.playerRed = playerYellow;
+		GAMEMASTER.playerRed = playerRed;
 		playerBlueName = getPlayerName(playerBlue);
-		playerRedName = getPlayerName(playerYellow);
+		playerRedName = getPlayerName(playerRed);
 		playerBlue.registerGameMaster(GAMEMASTER);
-		playerYellow.registerGameMaster(GAMEMASTER);
+		playerRed.registerGameMaster(GAMEMASTER);
 	}
 	
 	/**
-	 * Sends a message to each other players to come up with
-	 * their next move. This is done by running the Player's method
-	 * makeNextMove for each player.
+	 * Tells the players to make their first move
 	 */
 	public static void startGame() throws Exception {
 		setGameOver(false);
@@ -96,12 +94,6 @@ public final class GameMaster {
 	 * @param energyUse energyUse
 	 */
 	public void listenToPlayerMove(Player player, int energyUse) {
-		//TODO: each player uses this method to communicate how
-		//much energy he wants to use in the current turn. Treat
-		//all invalid inputs (values other than the energy currently
-		//available to the player) as equal to 0. If both players
-		// made a call to this method during the current round, run
-		// evaluateTurn()
 
 		if(!gameOver) {
 			
@@ -127,16 +119,11 @@ public final class GameMaster {
 	}
 	
 	/**
-	 * use the information submitted via listenToPlayerMove
-	 * to identify who won and update the players on the state of
-	 * the game by either running player.makeNextMove(if the game
-	 * has not yet ended). or player.gameOver(in case the game has
-	 * come to an end). If the game come to an end, also run
-	 * .updateRanking()
+	 * If the game is not over, use the information from
+	 * listenToPlayerMove() to figure out who won the round.
+	 * When game is over, it runs the updateRanking method
 	 */
 	private void evaluateTurn() {
-
-
 
 		if(!gameOver) {
 
@@ -180,6 +167,9 @@ public final class GameMaster {
 		}
 	}
 
+	/**
+	 * Runs when the game is over and updates the database
+	 */
 	private void updateRanking() {
 		gamesPlayed++;
 		// connection to the SQL database
@@ -208,9 +198,10 @@ public final class GameMaster {
 	/**
 	 * @return the gameOver
 	 */
-	public boolean isGameOver() {
+	public static boolean isGameOver() {
 		return (GOAL.contains(playerBlue.getCurrentPosition()) || (playerBlue.getCurrentEnergy() == 0 && playerRed.getCurrentEnergy() == 0));
 	}
+
 
 	private static void setGameOver(boolean gameOver) {
 		GAMEMASTER.gameOver = gameOver;
@@ -231,11 +222,11 @@ public final class GameMaster {
 	}
 
 	/**
-	 *
-	 * @param currentPosition
-	 * @return
+	 * Translates the position of the players into points
+	 * @param currentPosition position of the player
+	 * @return a float value with the player score
 	 */
-	public float getPointsFromPosition(int currentPosition) {
+	public static float getPointsFromPosition(int currentPosition) {
 		float points;
 		switch (currentPosition) {
 			case 0:
@@ -264,6 +255,12 @@ public final class GameMaster {
 		return points;
 	}
 
+	/**
+	 * Visualizes the gameboard at the of the game
+	 *
+	 * @param position position the game ended
+	 * @return String visualisation
+	 */
 	private String showPosition(int position) {
 		String x;
 		if(position != 3) {
@@ -280,6 +277,11 @@ public final class GameMaster {
 		return String.join("|",gameBoard);
 	}
 
+	/**
+	 * Colorizes the player names for the console
+	 * @param player the player
+	 * @return String with colorized names
+	 */
 	public static String getPlayerName(Player player) {
 
 		if(player.getName().equals(playerBlue.getName())) {

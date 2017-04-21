@@ -1,46 +1,46 @@
 Klasser:
     GameMaster
-    Player -> //TODO 2 Subklasser ->
+    Player -> //DONE 2 Subklasser ->
                     for å ha forskjellige strategier i makeNextMove()
 
 Metoder:
     GM:
         GameMaster() ->
 
-        //TODO getGameMaster(): GameMaster ->
+        //DONE getGameMaster(): GameMaster ->
             Brukes for å koble spillerene til en arena
 
-        //TODO setPlayers(Player player1, Player player2) ->
+        //DONE setPlayers(Player player1, Player player2) ->
             Setter to spillere til arenaen
 
-        //TODO startGame() ->
+        //DONE startGame() ->
             Sender beskjed til begge spillerene om at de skal gjøre sitt trekk
 
-        //TODO listenToPlayerMove(Player player, int move) ->
+        //DONE listenToPlayerMove(Player player, int move) ->
             Her mottar GM hvor mye energi spillerene skal bruke på neste trekk
             om energien er en bokstav eller negativt tall blir energien satt til
             0
 
-        //TODO evaluateTurn() ->
+        //DONE evaluateTurn() ->
             Bruker informasjonen fra listenToPlayerMove() for å finne en vinner
             oppdaterer deretter på hvilken posisjon spillerene befinner seg i
             ved å kalle player.makeNextMove eller player.gameOver()
             Om spillet er slutt blir også updateRanking() kjørt
 
-        //TODO updateRanking() ->
+        //DONE updateRanking() ->
             Sender SQL spørring til server for å oppdatere tabellen ranking med
             navn på spiller og poengsummen.
             Om tabellen ikke finnes fra før, lag den med spesifikasjonene under
             seksjon "Tabell" nederst på siden.
 
-    P:
-        //TODO Player(String name) ->
+    P: //DONE
+        //DONE Player(String name) ->
             Setter navn på spilleren
 
-        //TODO registerGameMaster(GameMaster gameMaster) ->
+        //DONE registerGameMaster(GameMaster gameMaster) ->
             henter gameMaster som holder styr på stillingen og posisjonen
 
-        //TODO makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) ->
+        //DONE makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) ->
             Her skal strategien til spilleren utformes.
             forslag til strategier ->
 
@@ -57,7 +57,7 @@ Metoder:
 
             kjør gameMaster.listenToPlayerMove() for å gi beskjed om valget
 
-        //TODO gameOver(float earnedPoints)
+        //DONE gameOver(float earnedPoints)
 
 Variabler:
     GM:
@@ -72,7 +72,7 @@ Variabler:
         int energy -> holder på energien til spilleren
         String name -> holder på navnet til spilleren
 
-//TODO Tabell:
+//DONE Tabell:
     "ranking" ->
         kolonner:
             - "player" (VARCHAR128) -> Player name

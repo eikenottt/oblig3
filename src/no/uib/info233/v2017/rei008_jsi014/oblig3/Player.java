@@ -44,9 +44,7 @@ public class Player {
 	 * @param opponentEnergy opponent energy
 	 */
 	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
-		/*if(gameMaster.isGameOver()) {
-			gameMaster.setGameOver(true);
-		}*/
+
 	}
 	
 	/**
@@ -54,7 +52,7 @@ public class Player {
 	 * @param earnedPoints
 	 */
 	public void gameOver(float earnedPoints) {
-		//TODO: informs the player that the game has come to an
+		//DONE: informs the player that the game has come to an
 		// end and how many points he earned in the game
 		System.out.println(getGameMaster().getPlayerName(this) + " earned " + earnedPoints + " points!");
 	}
@@ -64,7 +62,7 @@ public class Player {
 	 * @param value
 	 */
 	public void updateEnergy(int value) {
-		this.currentEnergy += value;
+		this.currentEnergy += (this.currentEnergy <= 0) ? 0 : value;
 	}
 	
 	/**
@@ -115,7 +113,7 @@ public class Player {
 	 * @param currentEnergy
 	 */
 	public void setCurrentEnergy(int currentEnergy) {
-		this.currentEnergy = currentEnergy;
+		this.currentEnergy = (currentEnergy < 0) ? 0 : currentEnergy;
 	}
 
 	protected int minusFive(int energy) {
