@@ -1,18 +1,7 @@
 Weakness
+    - Mange void metoder, dårlig testability
     -
 
 
 
 
-    AggressivePlayer
-
-        Attack moves
-            private int overheadSwing(){
-                int attackPower;
-
-                if(yourEnergy < 35){
-
-                     attack
-                 }
-                }
-            }

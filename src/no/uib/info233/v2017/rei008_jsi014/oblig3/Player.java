@@ -3,8 +3,12 @@ package no.uib.info233.v2017.rei008_jsi014.oblig3;
 import java.util.Random;
 
 /**
- * Class Player, manages player moves
- * @author tny034
+ * Describes the super class of Player Subclasses
+ * The class introduces commonalities between all playes
+ * and introduces some basic attacks.
+ * @author rei008
+ * @author js014
+ * @version 0.1
  *
  */
 public class Player {
@@ -18,6 +22,8 @@ public class Player {
 	
 	/**
 	 * Constructor for player
+	 * sets currentPosition as 3 by default
+	 * sets currentEnergy as 100 by default
 	 * @param name name
 	 */
 	public Player(String name) {
@@ -27,8 +33,7 @@ public class Player {
 	}
 	
 	/**
-	 * Sets the gameMaster for the player to
-	 * communicate with.
+	 * Sets the gameMaster
 	 * @param gameMaster
 	 */
 	public void registerGameMaster(GameMaster gameMaster) {
@@ -36,38 +41,39 @@ public class Player {
 	}
 	
 	/**
-	 * Figures out how much energy the player wants to spend
-	 * based on the current state of the game. Call gameMaster.listenToPlayerMove
-	 * to inform the gameMaster about the player choice.
+	 * Takes in parameters of currentPosistion, currentEnergy and opponentEnergy
+	 * and uses the information to strategize the next move the player wants to make.
+	 * When the player has decided, it informs the gameMaster of how much energy it wants to spend,
 	 * @param currentPosition player position
 	 * @param yourEnergy player energy
 	 * @param opponentEnergy opponent energy
 	 */
 	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
-
 	}
 	
 	/**
-	 * Sets the game to end
+	 * Print method, to write out the points earned by the player after a game.
 	 * @param earnedPoints
 	 */
 	public void gameOver(float earnedPoints) {
-		//DONE: informs the player that the game has come to an
-		// end and how many points he earned in the game
+
 		System.out.println(getGameMaster().getPlayerName(this) + " earned " + earnedPoints + " points!");
 	}
 	
 	/**
-	 * Adjusts the energy value for player
-	 * @param value
+	 * Updates the energy value for player
+	 * @param value - adds value to the currentEnergy
 	 */
 	public void updateEnergy(int value) {
-		this.currentEnergy += (this.currentEnergy <= 0) ? 0 : value;
+		this.currentEnergy += value;
+		if (currentEnergy < 0) {
+			currentEnergy = 0;
+		}
 	}
 	
 	/**
-	 * Adjusts the position for player
-	 * @param value
+	 * Update the position for player
+	 * @param value - adds value to the currentPosition
 	 */
 	public void updatePosition(int value) {
 		currentPosition += value;
@@ -109,16 +115,11 @@ public class Player {
 	}
 
 	/**
-	 *
-	 * @param currentEnergy
+	 *	Sets the currentEnergy
+	 * @param currentEnergy - new value of currentEnergy
 	 */
 	public void setCurrentEnergy(int currentEnergy) {
-		this.currentEnergy = (currentEnergy < 0) ? 0 : currentEnergy;
-	}
-
-	protected int minusFive(int energy) {
-
-		return energy;
+		this.currentEnergy = currentEnergy;
 	}
 
 	@Override
@@ -146,6 +147,12 @@ public class Player {
 		return true;
 	}
 
+	/**
+	 * A high energy usage basic attack all players can perform.
+	 * implements some randomness
+	 * @param yourEnergy - the energy the player has available
+	 * @return int energy to spend
+	 */
     protected int overheadSwing(int yourEnergy){
         int randNumber;
         randNumber = rand.nextInt(15);
@@ -157,7 +164,12 @@ public class Player {
         }
     }
 
-    protected int stab(int yourEnergy){
+	/**
+	 * Low predictability attack, implements a lot of randomness
+	 * @param yourEnergy - the energy the player has available
+	 * @return int energy to spend
+	 */
+	protected int stab(int yourEnergy){
 
         int randNumber;
         randNumber = this.rand.nextInt(50);
@@ -170,6 +182,13 @@ public class Player {
             return 0;
         }
     }
+
+	/**
+	 * The most basic attack midrange energy usage
+	 * Implements some randomness in return
+	 * @param yourEnergy - the energy the player has available
+	 * @return int energy to spend
+	 */
     protected int slash(int yourEnergy){
 
         int randNumber = this.rand.nextInt(15);
