@@ -1,5 +1,6 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
+
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,7 @@ public final class GameMaster {
 	private static Player playerRed;
 
 	// ArrayList containing the two positions where the game ends
-	private static final ArrayList<Integer> GOAL = new ArrayList<>(2);
+	private final ArrayList<Integer> GOAL = new ArrayList<>(2);
 
 	// Players energy use
 	private int p1_energyUse;
@@ -69,8 +70,8 @@ public final class GameMaster {
 	 * @param playerRed playerRed
 	 */
 	public static void setPlayers(Player playerBlue, Player playerRed) {
-		GAMEMASTER.playerBlue = playerBlue;
-		GAMEMASTER.playerRed = playerRed;
+		GameMaster.playerBlue = playerBlue;
+		GameMaster.playerRed = playerRed;
 		playerBlueName = getPlayerName(playerBlue);
 		playerRedName = getPlayerName(playerRed);
 		playerBlue.registerGameMaster(GAMEMASTER);
@@ -198,7 +199,7 @@ public final class GameMaster {
 	/**
 	 * @return the gameOver
 	 */
-	public static boolean isGameOver() {
+	public boolean isGameOver() {
 		return (GOAL.contains(playerBlue.getCurrentPosition()) || (playerBlue.getCurrentEnergy() == 0 && playerRed.getCurrentEnergy() == 0));
 	}
 

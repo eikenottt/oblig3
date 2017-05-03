@@ -1,6 +1,7 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig3;
 
 
+
 /**
  * Describes an Aggressive type player: strategy is to spend a lot of energy to win games both in offence,
  * and defence. Introduces the special attack whirlWind(), a high energy attack.
