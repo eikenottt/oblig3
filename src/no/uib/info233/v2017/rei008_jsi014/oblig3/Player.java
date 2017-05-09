@@ -12,7 +12,7 @@ import java.util.Random;
  * @version 0.1
  *
  */
-public class Player {
+public abstract class Player {
 	
 	private String name;
 	private int currentPosition;
