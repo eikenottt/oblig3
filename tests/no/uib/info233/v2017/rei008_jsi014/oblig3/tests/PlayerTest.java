@@ -3,10 +3,10 @@ package no.uib.info233.v2017.rei008_jsi014.oblig3.tests;
 import org.junit.Before;
 import org.junit.Test;
 
-import no.uib.info233.v2017.rei008_jsi014.oblig3.AggressivePlayer;
-import no.uib.info233.v2017.rei008_jsi014.oblig3.GameMaster;
-import no.uib.info233.v2017.rei008_jsi014.oblig3.PassivePlayer;
-import no.uib.info233.v2017.rei008_jsi014.oblig3.Player;
+import no.uib.info233.v2017.rei008_jsi014.oblig4.AggressivePlayer;
+import no.uib.info233.v2017.rei008_jsi014.oblig4.GameMaster;
+import no.uib.info233.v2017.rei008_jsi014.oblig4.PassivePlayer;
+import no.uib.info233.v2017.rei008_jsi014.oblig4.Player;
 
 import static org.junit.Assert.assertEquals;
 

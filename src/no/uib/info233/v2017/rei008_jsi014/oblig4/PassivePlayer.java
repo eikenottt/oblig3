@@ -1,4 +1,4 @@
-package no.uib.info233.v2017.rei008_jsi014.oblig3;
+package no.uib.info233.v2017.rei008_jsi014.oblig4;
 
 
 /**
