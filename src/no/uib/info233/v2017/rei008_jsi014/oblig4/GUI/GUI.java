@@ -8,6 +8,8 @@ import java.awt.*;
  */
 public class GUI extends JFrame {
 
+    private final Color bgColor;
+
     public static void main(String[] args) {
 
         new GUI();
@@ -15,7 +17,14 @@ public class GUI extends JFrame {
     }
 
     public GUI() {
-        this.setSize(400,400);
+
+        Font avenir = new Font("Avenir", Font.BOLD, 20);
+
+        this.setFont(avenir);
+
+        bgColor = new Color(70, 70, 70);
+
+        this.setSize(400,200);
 
         Toolkit tk = Toolkit.getDefaultToolkit();
 
@@ -28,35 +37,56 @@ public class GUI extends JFrame {
 
         this.setResizable(false);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        this.setTitle("My First Frame");
+        this.setTitle("Sword Fight");
 
         JPanel thePanel = new JPanel();
 
-        JLabel label1 = new JLabel("Tell Me Something");
+        JLabel label1 = new JLabel("Playername:", JLabel.CENTER);
 
-        label1.setText("New Text");
+        label1.setToolTipText("Please enter your playername");
 
-        label1.setToolTipText("Doesn't do anything");
+        label1.setForeground(new Color(255,255,255));
+        label1.setFont(avenir);
+
+        label1.setSize(400,30);
 
         thePanel.add(label1);
 
-        JButton button1 = new JButton("Send");
+        JButton button1 = new JButton("Continue");
 
-        button1.setText("New Button");
+        button1.setToolTipText("Continue to the main screen");
 
-        button1.setToolTipText("It's a button");
+        button1.setFont(avenir);
 
         thePanel.add(button1);
 
-        JTextField textField = new JTextField("Type here", 15);
+        JTextField textField = new JTextField("", 15);
 
         textField.setColumns(10);
 
+        textField.setFont(avenir);
+
         thePanel.add(textField);
 
-        this.add(thePanel);
+        thePanel.setLayout(new FlowLayout());
+
+        JPanel panel2 = new JPanel();
+
+        thePanel.setBackground(bgColor);
+
+        panel2.setBackground(bgColor);
+
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
+
+        panel2.add(label1);
+        panel2.add(textField);
+        panel2.add(button1);
+
+        thePanel.add(panel2);
+
+        this.add(thePanel, BorderLayout.CENTER);
 
         this.setVisible(true);
     }

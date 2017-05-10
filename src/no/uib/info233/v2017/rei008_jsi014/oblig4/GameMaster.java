@@ -266,10 +266,7 @@ public final class GameMaster {
 		String x;
 		if(position != 3) {
 			x = GREEN+"X"+RED;
-		}else if (position == 6) {
-			x = GREEN+"X"+RESET_COLOR;
-		}
-		else {
+		}else {
 			x = RESET_COLOR+"X"+RED;
 		}
 
