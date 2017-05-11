@@ -8,7 +8,12 @@ import java.awt.*;
  */
 public class GUI extends JFrame {
 
-    private final Color bgColor;
+    private Color bgColor;
+    private JPanel p = new JPanel();
+    private JButton b = new JButton("Continue");
+    private JPanel panel2 = new JPanel();
+    private JTextField textField = new JTextField("", 15);
+    private JLabel label1 = new JLabel("Playername:", JLabel.CENTER);
 
     public static void main(String[] args) {
 
@@ -16,13 +21,29 @@ public class GUI extends JFrame {
 
     }
 
-    public GUI() {
+    private GUI() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+        bgColor = new Color(70, 70, 70);
+        setPlayerNameGUI();
+        this.setVisible(true);
+    }
 
+    private void setPlayerNameGUI() {
         Font avenir = new Font("Avenir", Font.BOLD, 20);
 
-        this.setFont(avenir);
+        JOptionPane optionPane = new JOptionPane("Write your playername", JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_OPTION,null, null, "player1");
 
-        bgColor = new Color(70, 70, 70);
+        this.setFont(avenir);
 
         this.setSize(400,200);
 
@@ -41,10 +62,6 @@ public class GUI extends JFrame {
 
         this.setTitle("Sword Fight");
 
-        JPanel thePanel = new JPanel();
-
-        JLabel label1 = new JLabel("Playername:", JLabel.CENTER);
-
         label1.setToolTipText("Please enter your playername");
 
         label1.setForeground(new Color(255,255,255));
@@ -52,29 +69,23 @@ public class GUI extends JFrame {
 
         label1.setSize(400,30);
 
-        thePanel.add(label1);
+        p.add(label1);
 
-        JButton button1 = new JButton("Continue");
+        b.setToolTipText("Continue to the main screen");
 
-        button1.setToolTipText("Continue to the main screen");
+        b.setFont(avenir);
 
-        button1.setFont(avenir);
-
-        thePanel.add(button1);
-
-        JTextField textField = new JTextField("", 15);
+        p.add(b);
 
         textField.setColumns(10);
 
         textField.setFont(avenir);
 
-        thePanel.add(textField);
+        p.add(textField);
 
-        thePanel.setLayout(new FlowLayout());
+        p.setLayout(new FlowLayout());
 
-        JPanel panel2 = new JPanel();
-
-        thePanel.setBackground(bgColor);
+        p.setBackground(bgColor);
 
         panel2.setBackground(bgColor);
 
@@ -82,12 +93,10 @@ public class GUI extends JFrame {
 
         panel2.add(label1);
         panel2.add(textField);
-        panel2.add(button1);
+        panel2.add(b);
 
-        thePanel.add(panel2);
+        p.add(panel2);
 
-        this.add(thePanel, BorderLayout.CENTER);
-
-        this.setVisible(true);
+        this.add(p, BorderLayout.CENTER);
     }
 }
