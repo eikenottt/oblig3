@@ -3,6 +3,7 @@ package no.uib.info233.v2017.rei008_jsi014.oblig4.GUI;
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.awt.*;
 import java.util.Enumeration;
 
@@ -32,6 +33,17 @@ public class NewWindow extends JFrame {
     }
 
     private void setUI() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         FontUIResource f = new FontUIResource("Avenir", Font.BOLD, 20);
         ColorUIResource bg = new ColorUIResource(70,70,70);
         ColorUIResource fg = new ColorUIResource(255,255,255);
@@ -46,11 +58,13 @@ public class NewWindow extends JFrame {
                 }
                 if (value instanceof ColorUIResource) {
                     if(key.toString().contains("background"))
-                        UIManager.put(key, bg);
+                        UIManager.put(key, new Color(70,70,70));
                     if(key.toString().contains("foreground"))
                         UIManager.put(key, fg);
                     if(key.toString().contains("Button.background"))
                         UIManager.put(key, buttonBG);
+                    if(key.toString().contains("Button.foreground"))
+                        UIManager.put(key, fg);
                     if(key.toString().contains("Button.select")) {
                         UIManager.put(key, bg);
                     }
