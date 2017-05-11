@@ -1,77 +1,145 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4.GUI;
 
 import javax.swing.*;
-import javax.swing.plaf.ButtonUI;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.FontUIResource;
 import java.awt.*;
-import java.util.Enumeration;
+import java.awt.event.*;
 
-/**
- * Created by Rune on 11.05.2017.
- */
-public class TestGUI extends JFrame {
+
+public class TestGUI {
+
+    // Constraint to
+    private GridBagConstraints gbc = new GridBagConstraints();
+
+    // Default playername
+    private String playerName = "Player 1";
+
     public static void main(String[] args) {
         new TestGUI();
     }
 
     private TestGUI() {
-        initializeUI();
-        JPanel p = new JPanel();
-        JPanel p2 = new JPanel();
-        p.setLayout(new GridBagLayout());
-        p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
-        GridBagConstraints gbc = new GridBagConstraints();
-        JButton b = new JButton("Continue");
-        b.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        JLabel l = new JLabel("Playername:");
-        l.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        JTextField tf = new JTextField("", 15);
-        p2.add(l, gbc);
-        p2.add(tf, gbc);
-        p2.add(b, gbc);
-        p.add(p2);
-        add(p);
-        setVisible(true);
+        createPlayerNameFrame();
     }
 
-    private void setUI() {
-        FontUIResource f = new FontUIResource("Avenir", Font.BOLD, 20);
-        ColorUIResource bg = new ColorUIResource(70,70,70);
-        ColorUIResource fg = new ColorUIResource(255,255,255);
-        Color buttonBG = new Color(120,120,120);
-        Enumeration keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get(key);
-            if(value != null) {
-                if (value instanceof FontUIResource) {
-                    UIManager.put(key, f);
-                }
-                if (value instanceof ColorUIResource) {
-                    if(key.toString().contains("background"))
-                        UIManager.put(key, bg);
-                    if(key.toString().contains("foreground"))
-                        UIManager.put(key, fg);
-                    if(key.toString().contains("Button.background"))
-                        UIManager.put(key, buttonBG);
-                    if(key.toString().contains("Button.select")) {
-                        UIManager.put(key, bg);
-                    }
-                    if(key.toString().contains("TextField.background"))
-                        UIManager.put(key, fg);
-                    if(key.toString().contains("TextField.foreground"))
-                        UIManager.put(key, bg);
+
+    private void createPlayerNameFrame() {
+        // Make a new JFrame
+        NewWindow playerNameFrame = new NewWindow(400, 200);
+
+        // Initialize the objects
+        JPanel framePanel = new JPanel(), contentPanel = new JPanel();
+        JButton continueButton = new JButton("Continue");
+        JLabel playerLabel = new JLabel("Playername:");
+        JTextField playerNameTextField = new JTextField("", 15);
+
+        // Set Layouts for panels
+        framePanel.setLayout(new GridBagLayout());
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+
+        // center the button and label
+        continueButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        playerLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+
+        // Add everything to panels
+        contentPanel.add(playerLabel, gbc);
+        contentPanel.add(playerNameTextField, gbc);
+        contentPanel.add(continueButton, gbc);
+        framePanel.add(contentPanel);
+        playerNameFrame.add(framePanel);
+
+        // Listen for buttonpress
+        continueButton.addActionListener(e -> {
+            if(!playerNameTextField.getText().equals(""))
+                playerName = playerNameTextField.getText();
+            createMainFrame();
+            playerNameFrame.dispose();
+        });
+
+        // Listen for "Enter"-key press
+        playerNameTextField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    playerName = playerNameTextField.getText();
+                    createMainFrame();
+                    playerNameFrame.dispose();
                 }
             }
-        }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+
+        // Show the frame
+        playerNameFrame.setVisible(true);
     }
 
-    private void initializeUI() {
-        setUI();
-        setSize(400, 200);
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+    private void createMainFrame() {
+        // Get score from database
+        Float score = 0f;
+
+        // Image to show in menu
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("icon.png"));
+
+        // Image in a JLabel
+        JLabel lab = new JLabel(imageIcon);
+
+        // Make new Frame
+        NewWindow mainFrame = new NewWindow(1000, 500);
+        mainFrame.setDefaultClose(JFrame.EXIT_ON_CLOSE);
+
+        // Make and initialize the JPanels
+        JPanel headPanel = new JPanel(),
+                head_nameAndScorePanel = new JPanel(),
+                head_buttonPanel = new JPanel(),
+                contentPanel = new JPanel(),
+                framePanel = new JPanel();
+
+        // Set panel layout
+        head_nameAndScorePanel.setLayout(new FlowLayout());
+        head_buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        headPanel.setLayout(new BoxLayout(headPanel, BoxLayout.Y_AXIS));
+        contentPanel.setLayout(new BorderLayout());
+        framePanel.setLayout(new GridBagLayout());
+
+        head_nameAndScorePanel.setSize(500, 40);
+
+        // Make and initialize JLabels and JButtons
+        JLabel playerLabel = new JLabel(playerName, JLabel.LEFT),
+                scoreLabel = new JLabel("Score: "+score.toString(), JLabel.RIGHT);
+        JButton singleplayerButton = new JButton("Singleplayer"),
+                multiplayerButton = new JButton("Multiplayer");
+
+        // Add lables to own panel
+        head_nameAndScorePanel.add(playerLabel);
+        head_nameAndScorePanel.add(scoreLabel);
+
+        // Add buttons to own panel
+        head_buttonPanel.add(singleplayerButton);
+        head_buttonPanel.add(multiplayerButton);
+
+        // Add picture to content panel
+        contentPanel.add(lab);
+
+        // Add labels and buttons in head panel
+        headPanel.add(head_nameAndScorePanel);
+        headPanel.add(head_buttonPanel);
+
+        // Add head and content panels in frame panel
+        framePanel.add(headPanel);
+        framePanel.add(contentPanel);
+
+        // Add the frame panel to the frame
+        mainFrame.add(framePanel);
+
+        // Set frame visible
+        mainFrame.setVisible(true);
     }
 }
