@@ -53,9 +53,9 @@ public class Connector {
 
     }
 
-    public void updateSavedGame(String gameId, String player1, String player2, int gamePosition){
+    public void updateSavedGame(String gameId, Player player1, Player player2, int gamePosition){
         try {
-            statement = getConnection().prepareStatement( "INSERT INTO saved_games (game_id, player_1, player_2, game_position) VALUES (gameId, player1, player2, gamePosition)");
+            statement = getConnection().prepareStatement( "INSERT INTO saved_games (game_id, player_1, player_2, game_position, player_1_energy, player_2_energy) VALUES ('"+gameId+"', '"+player1.getName()+"', '"+player2.getName()+"', '"+gamePosition+"', "+player1.getCurrentEnergy()+", "+player2.getCurrentEnergy()+")");
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

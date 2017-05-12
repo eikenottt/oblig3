@@ -9,11 +9,15 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 
 		GameMaster gameMaster = new GameMaster();
+		Connector conn = new Connector();
 
 		Player robot1 = new AggressivePlayer("Cato");
 		Player robot2 = new PassivePlayer("Svein");
 		Player robot3 = new AggressivePlayer("Nora");
 		Player robot4 = new PassivePlayer("Karl");
+		String gameid = "ostekuler";
+
+		conn.updateSavedGame(gameid, robot1, robot2, 2);
 
 		gameMaster.setPlayers(robot1, robot2);
 		gameMaster.startGame();
