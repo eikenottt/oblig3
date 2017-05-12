@@ -8,18 +8,18 @@ public class Application {
 	
 	public static void main(String[] args) throws Exception {
 
-
+		GameMaster gameMaster = new GameMaster();
 
 		Player robot1 = new AggressivePlayer("Cato");
 		Player robot2 = new PassivePlayer("Svein");
 		Player robot3 = new AggressivePlayer("Nora");
 		Player robot4 = new PassivePlayer("Karl");
 
-		GameMaster.setPlayers(robot1, robot2);
-		GameMaster.getGameMaster().startGame();
+		gameMaster.setPlayers(robot1, robot2);
+		gameMaster.startGame();
 
-		GameMaster.getGameMaster().setPlayers(robot3, robot4);
-		GameMaster.getGameMaster().startGame();
+		gameMaster.setPlayers(robot3, robot4);
+		gameMaster.startGame();
 	}
 
 }

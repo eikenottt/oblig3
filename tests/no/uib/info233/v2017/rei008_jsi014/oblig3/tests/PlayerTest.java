@@ -19,7 +19,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
-        gameMaster = GameMaster.getGameMaster();
+        gameMaster = new GameMaster();
         player1 = new AggressivePlayer("Android");
         player2 = new PassivePlayer("iOS");
         gameMaster.setPlayers(player1, player2);

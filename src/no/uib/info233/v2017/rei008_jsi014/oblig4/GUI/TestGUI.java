@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static java.awt.Font.BOLD;
+
 
 public class TestGUI {
 
@@ -115,7 +117,8 @@ public class TestGUI {
 
         // Make and initialize JLabels and JButtons
         JLabel playerLabel = new JLabel(playerName, JLabel.CENTER),
-                scoreLabel = new JLabel("Score: "+score.toString(), JLabel.NORTH_EAST);
+                scoreLabel = new JLabel("Score: "+score.toString(), JLabel.RIGHT);
+
         JButton singleplayerButton = new JButton("Singleplayer", singleplayerImage),
                 multiplayerButton = new JButton("Multiplayer", multiplayerImage);
 

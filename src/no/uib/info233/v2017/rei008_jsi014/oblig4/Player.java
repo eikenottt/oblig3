@@ -49,7 +49,7 @@ public abstract class Player {
 	 * @param yourEnergy player energy
 	 * @param opponentEnergy opponent energy
 	 */
-	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) throws Exception {
+	public void makeNextMove(int currentPosition, int yourEnergy, int opponentEnergy) {
 	}
 	
 	/**

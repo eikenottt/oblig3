@@ -59,7 +59,7 @@ public class NewWindow extends JFrame {
                 }
                 if (value instanceof ColorUIResource) {
                     if(key.toString().contains("background"))
-                        UIManager.put(key, new Color(70,70,70));
+                        UIManager.put(key, bg);
                     if(key.toString().contains("foreground"))
                         UIManager.put(key, fg);
                     if(key.toString().contains("Button.background"))
