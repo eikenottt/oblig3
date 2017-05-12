@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import static java.awt.Font.BOLD;
-
 
 public class TestGUI {
 
@@ -15,12 +13,16 @@ public class TestGUI {
     // Default playername
     private String playerName = "Player 1";
 
+    // Get score from database
+    private Float score = 0f;
+
     public static void main(String[] args) {
         new TestGUI();
     }
 
     private TestGUI() {
         createPlayerNameFrame();
+        //createMultiplayerFrame();
     }
 
 
@@ -84,8 +86,6 @@ public class TestGUI {
     }
 
     private void createMainFrame() {
-        // Get score from database
-        Float score = 0f;
 
         // Import images
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("icon.png"));
@@ -97,8 +97,85 @@ public class TestGUI {
 
         // Make new Frame
         NewWindow mainFrame = new NewWindow(1000, 500);
-        mainFrame.setDefaultClose(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultClose(JFrame.DO_NOTHING_ON_CLOSE);
 
+        // Make and initialize the JPanels
+        JPanel headPanel = new JPanel(),
+                head_nameAndScorePanel = new JPanel(),
+                head_buttonPanel = new JPanel(),
+                contentPanel = new JPanel(),
+                framePanel = new JPanel();
+
+        // Set panel layout
+        head_nameAndScorePanel.setLayout(new BorderLayout());
+        head_buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        headPanel.setLayout(new BoxLayout(headPanel, BoxLayout.Y_AXIS));
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));
+        framePanel.setLayout(new BoxLayout(framePanel, BoxLayout.Y_AXIS));
+
+        head_nameAndScorePanel.setSize(500, 40);
+
+        // Make and initialize JLabels and JButtons
+        JLabel playerLabel = new JLabel(playerName, JLabel.CENTER),
+                scoreLabel = new JLabel("Score: "+score.toString(), JLabel.RIGHT);
+
+        JButton singleplayerButton = new JButton("Singleplayer", singleplayerImage),
+                multiplayerButton = new JButton("Multiplayer", multiplayerImage),
+                quitGameButton = new JButton("Quit Game");
+
+
+        // Listen for buttonpress
+        multiplayerButton.addActionListener(e -> {
+            createMultiplayerFrame();
+            mainFrame.dispose();
+        });
+
+        quitGameButton.addActionListener(e -> {
+            int sureYouWantToQuit = JOptionPane.showConfirmDialog(mainFrame,"Are you sure you want to quit the game?", "Quit Game", JOptionPane.YES_NO_OPTION);
+            if(sureYouWantToQuit == JOptionPane.YES_OPTION){
+                System.exit(0);
+            }
+        });
+
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int sureYouWantToQuit = JOptionPane.showConfirmDialog(mainFrame,"Are you sure you want to quit the game?", "Quit Game", JOptionPane.YES_NO_OPTION);
+                if(sureYouWantToQuit == JOptionPane.YES_OPTION){
+                    System.exit(0);
+                }
+            }
+        });
+
+        // Add lables to own panel
+        head_nameAndScorePanel.add(playerLabel, BorderLayout.NORTH);
+        head_nameAndScorePanel.add(scoreLabel, BorderLayout.EAST);
+
+        // Add buttons to own panel
+        head_buttonPanel.add(singleplayerButton);
+        head_buttonPanel.add(multiplayerButton);
+        head_buttonPanel.add(quitGameButton);
+
+        // Add picture to content panel
+        contentPanel.add(iconLabel);
+
+        // Add labels and buttons in head panel
+        headPanel.add(head_nameAndScorePanel);
+        headPanel.add(head_buttonPanel);
+
+        // Add head and content panels in frame panel
+        framePanel.add(headPanel);
+        framePanel.add(contentPanel);
+
+        // Add the frame panel to the frame
+        mainFrame.add(framePanel);
+
+        // Set frame visible
+        mainFrame.setVisible(true);
+    }
+
+    private void createMultiplayerFrame() {
+        NewWindow multiplayerFrame = new NewWindow(1000, 500);
         // Make and initialize the JPanels
         JPanel headPanel = new JPanel(),
                 head_nameAndScorePanel = new JPanel(),
@@ -119,19 +196,35 @@ public class TestGUI {
         JLabel playerLabel = new JLabel(playerName, JLabel.CENTER),
                 scoreLabel = new JLabel("Score: "+score.toString(), JLabel.RIGHT);
 
-        JButton singleplayerButton = new JButton("Singleplayer", singleplayerImage),
-                multiplayerButton = new JButton("Multiplayer", multiplayerImage);
+        JButton createGameButton = new JButton("Create Game"),
+                backToMenuButton = new JButton("Back to Menu");
+
+
+        // Listen for buttonpress
+        backToMenuButton.addActionListener(e -> {
+            createMainFrame();
+            multiplayerFrame.dispose();
+        });
+
+        multiplayerFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                createMainFrame();
+                multiplayerFrame.dispose();
+            }
+        });
 
         // Add lables to own panel
         head_nameAndScorePanel.add(playerLabel, BorderLayout.NORTH);
         head_nameAndScorePanel.add(scoreLabel, BorderLayout.EAST);
 
         // Add buttons to own panel
-        head_buttonPanel.add(singleplayerButton);
-        head_buttonPanel.add(multiplayerButton);
+        head_buttonPanel.add(createGameButton, BorderLayout.WEST);
+        head_buttonPanel.add(backToMenuButton, BorderLayout.EAST);
 
-        // Add picture to content panel
-        contentPanel.add(iconLabel);
+        // Add List to content panel
+        ListTest n = new ListTest();
+        contentPanel.add(n.getPanel());
 
         // Add labels and buttons in head panel
         headPanel.add(head_nameAndScorePanel);
@@ -142,9 +235,10 @@ public class TestGUI {
         framePanel.add(contentPanel);
 
         // Add the frame panel to the frame
-        mainFrame.add(framePanel);
+        multiplayerFrame.add(framePanel);
 
         // Set frame visible
-        mainFrame.setVisible(true);
+        multiplayerFrame.setVisible(true);
     }
+
 }
