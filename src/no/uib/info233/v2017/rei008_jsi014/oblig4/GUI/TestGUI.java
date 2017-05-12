@@ -85,11 +85,13 @@ public class TestGUI {
         // Get score from database
         Float score = 0f;
 
-        // Image to show in menu
+        // Import images
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("icon.png"));
+        ImageIcon singleplayerImage = new ImageIcon(getClass().getResource("Singleplayer.png"));
+        ImageIcon multiplayerImage = new ImageIcon(getClass().getResource("Multiplayer.png"));
 
         // Image in a JLabel
-        JLabel lab = new JLabel(imageIcon);
+        JLabel iconLabel = new JLabel(imageIcon);
 
         // Make new Frame
         NewWindow mainFrame = new NewWindow(1000, 500);
@@ -103,30 +105,30 @@ public class TestGUI {
                 framePanel = new JPanel();
 
         // Set panel layout
-        head_nameAndScorePanel.setLayout(new FlowLayout());
+        head_nameAndScorePanel.setLayout(new BorderLayout());
         head_buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         headPanel.setLayout(new BoxLayout(headPanel, BoxLayout.Y_AXIS));
         contentPanel.setLayout(new BorderLayout());
-        framePanel.setLayout(new GridBagLayout());
+        framePanel.setLayout(new BoxLayout(framePanel, BoxLayout.Y_AXIS));
 
         head_nameAndScorePanel.setSize(500, 40);
 
         // Make and initialize JLabels and JButtons
-        JLabel playerLabel = new JLabel(playerName, JLabel.LEFT),
-                scoreLabel = new JLabel("Score: "+score.toString(), JLabel.RIGHT);
-        JButton singleplayerButton = new JButton("Singleplayer"),
-                multiplayerButton = new JButton("Multiplayer");
+        JLabel playerLabel = new JLabel(playerName, JLabel.CENTER),
+                scoreLabel = new JLabel("Score: "+score.toString(), JLabel.NORTH_EAST);
+        JButton singleplayerButton = new JButton("Singleplayer", singleplayerImage),
+                multiplayerButton = new JButton("Multiplayer", multiplayerImage);
 
         // Add lables to own panel
-        head_nameAndScorePanel.add(playerLabel);
-        head_nameAndScorePanel.add(scoreLabel);
+        head_nameAndScorePanel.add(playerLabel, BorderLayout.NORTH);
+        head_nameAndScorePanel.add(scoreLabel, BorderLayout.EAST);
 
         // Add buttons to own panel
         head_buttonPanel.add(singleplayerButton);
         head_buttonPanel.add(multiplayerButton);
 
         // Add picture to content panel
-        contentPanel.add(lab);
+        contentPanel.add(iconLabel);
 
         // Add labels and buttons in head panel
         headPanel.add(head_nameAndScorePanel);

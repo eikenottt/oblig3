@@ -1,6 +1,7 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4.GUI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;
@@ -65,9 +66,10 @@ public class NewWindow extends JFrame {
                         UIManager.put(key, buttonBG);
                     if(key.toString().contains("Button.foreground"))
                         UIManager.put(key, fg);
-                    if(key.toString().contains("Button.select")) {
+                    if(key.toString().contains("Button.select"))
                         UIManager.put(key, bg);
-                    }
+                    if(key.toString().contains("Button.focus"))
+                        UIManager.put(key, buttonBG);
                     if(key.toString().contains("TextField.background"))
                         UIManager.put(key, fg);
                     if(key.toString().contains("TextField.foreground"))
