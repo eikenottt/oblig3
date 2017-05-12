@@ -26,7 +26,6 @@ public class NewWindow extends JFrame {
 
         setLocation(xPos, yPos);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setVisible(true);
     }
 
     public void setDefaultClose(int CLOSE) {
@@ -74,6 +73,8 @@ public class NewWindow extends JFrame {
                         UIManager.put(key, fg);
                     if(key.toString().contains("TextField.foreground"))
                         UIManager.put(key, bg);
+                    if(key.toString().contains("List.background"))
+                        UIManager.put(key, buttonBG);
                 }
             }
         }
