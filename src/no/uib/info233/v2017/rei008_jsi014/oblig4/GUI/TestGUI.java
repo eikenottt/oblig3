@@ -124,7 +124,7 @@ public class TestGUI {
                 quitGameButton = new JButton("Quit Game");
 
 
-        // Listen for buttonpress
+        // Listen for button press
         multiplayerButton.addActionListener(e -> {
             createMultiplayerFrame();
             mainFrame.dispose();

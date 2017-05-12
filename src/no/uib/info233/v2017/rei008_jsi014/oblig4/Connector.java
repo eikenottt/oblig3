@@ -21,7 +21,7 @@ public class Connector {
     public Connection getConnection() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://wildboy.uib.no/Syuty";
+            String url = "jdbc:mysql://wildboy.uib.no/oblig4";
             String usr = "Syuty";
             String pwr = "(+DDq2sSyk(3P)}8";
             Connection conn = DriverManager.getConnection(url, usr, pwr);
