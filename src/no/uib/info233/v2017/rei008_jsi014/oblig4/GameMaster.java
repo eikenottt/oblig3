@@ -1,6 +1,8 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4;
 
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.ArrayList;
 
 /**
@@ -249,6 +251,21 @@ public class GameMaster {
 		else {
 			return player2.getName();
 		}
+	}
+	public void loadGame(){
+		//TODO MAke this method load a saved game
+	}
+
+	public void saveGame(){
+		//TODO make this method save a game ()
+	}
+
+	public void hostGame(){
+		//TODO When a HumanPlayer creates a new multiplayer game, he is "hosting" the game.
+	}
+
+	public void listGames(){
+		//TODO displays the available games that players can join in the multiplayer section.
 	}
 
 	/**

@@ -52,4 +52,9 @@ public class Connector {
         statement.executeUpdate();
 
     }
+
+    public void updateSavedGame(String gameId, String player1, String player2, int gamePosition){
+        statement = getConnection().prepareStatement( "INSERT INTO saved_games (game_id, player_1, player_2, game_position) VALUES (gameId, player1, player2, gamePosition)");
+
+    }
 }
