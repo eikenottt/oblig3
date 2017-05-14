@@ -2,7 +2,9 @@ package no.uib.info233.v2017.rei008_jsi014.oblig4.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by runeeikemo on 12.05.2017.
@@ -11,15 +13,26 @@ public class ListTest extends JComponent {
 
     private JPanel m;
     private ArrayList<ArrayList<JComponent>> array = new ArrayList<>();
+    private HashMap<String, Float> players = new HashMap<>();
 
     JPanel ytterst = new JPanel(new BorderLayout());
 
     public ListTest() {
-
+        players.put("Rune", 20f);
+        players.put("John", 10.75f);
+        players.put("Kalle", 8.25f);
+        players.put("Kåre", 0f);
+        players.put("Vegard", -2.5f);
+        players.put("Malin", 29.75f);
     }
 
     public JPanel getPanel() {
-        getFromStuff(100);
+        ArrayList<JComponent> arr = new ArrayList<>();
+        arr.add(new JLabel("Gamename"));
+        arr.add(new JLabel("Highscore", JLabel.CENTER));
+        arr.add(new JLabel("Join Game"));
+        array.add(arr);
+        getFromStuff();
 
 
         m = new JPanel();
@@ -58,12 +71,12 @@ public class ListTest extends JComponent {
         }
     }
 
-    private void getFromStuff(int num) {
+    private void getFromStuff() {
 
-        for (int i=0; i < num; i++) {
+        for (String name : players.keySet()) {
             ArrayList<JComponent> array2 = new ArrayList<>();
-            array2.add(new JLabel("GameName"));
-            array2.add(new JLabel("Highscore", JLabel.CENTER));
+            array2.add(new JLabel(name));
+            array2.add(new JLabel(players.get(name).toString(), JLabel.CENTER));
             array2.add(new JButton("Join"));
             array.add(array2);
         }

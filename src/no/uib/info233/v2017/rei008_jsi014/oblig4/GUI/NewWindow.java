@@ -75,6 +75,9 @@ public class NewWindow extends JFrame {
                         UIManager.put(key, bg);
                     if(key.toString().contains("List.background"))
                         UIManager.put(key, buttonBG);
+                    if(key.toString().contains("OptionPane.messageForeground")) {
+                        UIManager.put(key, fg);
+                    }
                 }
             }
         }

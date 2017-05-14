@@ -1,6 +1,10 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4.GUI;
 
+import no.uib.info233.v2017.rei008_jsi014.oblig4.AggressivePlayer;
+import no.uib.info233.v2017.rei008_jsi014.oblig4.Player;
+
 import javax.swing.*;
+import javax.swing.plaf.ProgressBarUI;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -15,6 +19,8 @@ public class TestGUI {
 
     // Get score from database
     private Float score = 0f;
+
+    Player player1 = new AggressivePlayer("Kalle");
 
     public static void main(String[] args) {
         new TestGUI();
@@ -88,9 +94,9 @@ public class TestGUI {
     private void createMainFrame() {
 
         // Import images
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("icon.png"));
-        ImageIcon singleplayerImage = new ImageIcon(getClass().getResource("Singleplayer.png"));
-        ImageIcon multiplayerImage = new ImageIcon(getClass().getResource("Multiplayer.png"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("img/icon.png"));
+        ImageIcon singleplayerImage = new ImageIcon(getClass().getResource("img/Singleplayer.png"));
+        ImageIcon multiplayerImage = new ImageIcon(getClass().getResource("img/Multiplayer.png"));
 
         // Image in a JLabel
         JLabel iconLabel = new JLabel(imageIcon);
@@ -201,6 +207,12 @@ public class TestGUI {
 
 
         // Listen for buttonpress
+        createGameButton.addActionListener(e -> {
+            createLoadingFrame();
+            multiplayerFrame.dispose();
+        });
+
+
         backToMenuButton.addActionListener(e -> {
             createMainFrame();
             multiplayerFrame.dispose();
@@ -239,6 +251,35 @@ public class TestGUI {
 
         // Set frame visible
         multiplayerFrame.setVisible(true);
+    }
+
+    private void createLoadingFrame() {
+        NewWindow loadingFrame = new NewWindow(400, 200);
+        ImageIcon loading = new ImageIcon(getClass().getResource("img/Loading.gif"));
+
+        JPanel framePanel = new JPanel();
+        framePanel.setLayout(new BoxLayout(framePanel, BoxLayout.Y_AXIS));
+
+        JLabel iconHolder = new JLabel(loading);
+
+        JButton cancelButton = new JButton("Cancel");
+
+        cancelButton.addActionListener(e -> {
+            createMultiplayerFrame();
+            loadingFrame.dispose();
+        });
+
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar.setValue(0);
+
+        framePanel.add(iconHolder);
+        framePanel.add(progressBar);
+        framePanel.add(cancelButton);
+
+        loadingFrame.add(framePanel);
+
+        loadingFrame.setVisible(true);
+
     }
 
 }
