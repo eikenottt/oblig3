@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public class GameMaster {
 
+	// ID of the GameMaster
+	private String gameID;
 	// The Players
 	private Player player1;
 	private Player player2;
@@ -36,13 +38,15 @@ public class GameMaster {
 	// Is made to see if both players did run the listenToPlayerMove method
 	private int playerHasRun = 0;
 
+
+
 	/**
 	 * Constructor for GameMaster
 	 * initializes the energyUse for both players
 	 * and the positions where the games ends
 	 */
 	public GameMaster() {
-		generateGamemasterID();
+		gameID = generateGamemasterID();
 		gameOver = false;
 		p1_energyUse = -1;
 		p2_energyUse = -1;
@@ -63,6 +67,10 @@ public class GameMaster {
 		playerRedName = getPlayerName(playerRed);
 		playerBlue.registerGameMaster(this);
 		playerRed.registerGameMaster(this);
+	}
+
+	public void setGameID(String gameID) {
+		this.gameID = gameID;
 	}
 	
 	/**
@@ -190,6 +198,10 @@ public class GameMaster {
 		this.gameOver = gameOver;
 	}
 
+	public String getGameID() {
+		return gameID;
+	}
+
 	/**
 	 * @return the p1_energyUse
 	 */
@@ -276,6 +288,8 @@ public class GameMaster {
 		String gameID = this.toString();
 
 		return gameID.substring(gameID.indexOf("@"), gameID.length());
+
+
 	}
 
 }

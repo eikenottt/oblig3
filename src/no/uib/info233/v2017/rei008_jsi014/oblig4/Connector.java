@@ -1,10 +1,7 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 /**
  * Class to connect to a database
@@ -63,5 +60,30 @@ public class Connector {
 
     }
 
-    public void loadSaved(){}
+    public void loadSaved(GameMaster gameMaster){
+//        try {
+//            statement = getConnection().prepareStatement("SELECT ROW FROM oblig4.saved_games WHERE game_id="+gameMaster.getGameID()+"");
+//            ResultSet rs = statement.executeQuery();
+//            String id = rs.getString(1);
+//            gameMaster.setGameID(id);
+//
+//            String p1 = rs.getString(2);
+//            String p2 = rs.getString(3);
+//            Player player1 =  new HumanPlayer(p1);
+//            Player player2 = new PassivePlayer(p2);
+//            int p1Energy = rs.getInt(5);
+//            int p2Energy = rs.getInt(6);
+//            player1.setCurrentEnergy(p1Energy);
+//            player2.setCurrentEnergy(p2Energy);
+//            gameMaster.setPlayers(player1, player2);
+//
+//            int gamePos = rs.getInt(4);
+//            gameMaster.set
+
+
+
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+    }
 }
