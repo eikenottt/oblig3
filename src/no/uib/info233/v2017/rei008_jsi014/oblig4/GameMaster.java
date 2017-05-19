@@ -2,6 +2,7 @@ package no.uib.info233.v2017.rei008_jsi014.oblig4;
 
 
 import com.sun.xml.internal.bind.v2.TODO;
+import no.uib.info233.v2017.rei008_jsi014.oblig4.GUI.TestGUI;
 
 import java.util.ArrayList;
 
@@ -69,6 +70,7 @@ public class GameMaster {
 	 * Tells the players to make their first move
 	 */
 	public void startGame(){
+		TestGUI gui = new TestGUI();
 		setGameOver(false);
 		System.out.println(playerBlueName + " vs " + playerRedName + "\n");
 		player1.makeNextMove(player1.getCurrentPosition(), player1.getCurrentEnergy(), player2.getCurrentEnergy());

@@ -1,4 +1,8 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4;
+
+import no.uib.info233.v2017.rei008_jsi014.oblig4.GUI.TestGUI;
+import org.junit.Test;
+
 /**
  * Runs two separate games with four different players
  * @author rei008
