@@ -1,10 +1,7 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 /**
  * Class to connect to a database
@@ -63,5 +60,62 @@ public class Connector {
 
     }
 
-    public void loadSaved(){}
+    public GameMaster loadSaved(String gameID)throws SQLException{
+
+        Statement stmt = null;
+        String query = "SELECT game_id, player_1, player_2, game_position," +
+                        "player_1_energy, player_2_energy" +
+                        "FROM saved_games WHERE game_id = 'gameID'";
+
+        GameMaster gameMaster = new GameMaster();
+        try {
+
+            statement = getConnection().prepareStatement("SELECT * FROM saved_games WHERE game_id = ?");
+            statement.setString(1, gameID);
+            ResultSet rs = statement.executeQuery();
+
+                rs.next();
+                String id = rs.getString("game_id");
+                gameMaster.setGameID(id);
+
+                rs.next();
+                String p1 = rs.getString("player_1");
+                rs.next();
+                String p2 = rs.getString("player_2");
+                rs.next();
+
+                rs.next();
+                int gamePos = rs.getInt("game_position");
+                gameMaster.setGamePosition(gamePos);
+
+
+                int p1Energy = rs.getInt("player_1_energy");
+                rs.next();
+                int p2Energy = rs.getInt("player_2_energy");
+                Player player1 = new HumanPlayer(p1);
+                Player player2 = new HumanPlayer(p2);
+
+                player1.setCurrentEnergy(p1Energy);
+                player2.setCurrentEnergy(p2Energy);
+
+
+                gameMaster.setPlayers(player1, player2);
+
+
+                System.out.println("Loaded:  \n ID: " + id + " \n Player 1: " + p1 + " With " +p1Energy+ " Energy." +"\n Player 2: " +p2+ " With " + p2Energy + " Energy.");
+
+                return gameMaster;
+
+
+
+            } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return gameMaster;
+    }
+
 }
