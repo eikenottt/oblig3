@@ -3,6 +3,8 @@ package no.uib.info233.v2017.rei008_jsi014.oblig4;
 import no.uib.info233.v2017.rei008_jsi014.oblig4.GUI.TestGUI;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 /**
  * Runs two separate games with four different players
  * @author rei008
@@ -23,10 +25,14 @@ public class Application {
 
 //		conn.updateSavedGame(gameid, robot1, robot2, 2);
 
-		gameMaster.setPlayers(robot1, robot2);
-		gameMaster.startGame();
+//		gameMaster.setPlayers(robot1, robot2);
+//		gameMaster.startGame();
 
-		gameMaster.setPlayers(robot3, robot4);
+		HashMap<String, Float> Heisveis = conn.getMultiplayerMap(new HashMap<String, Float>());
+		for (String player: Heisveis.keySet()){
+			System.out.println(player + " " + Heisveis.get(player));
+		}
+//		gameMaster.setPlayers(robot3, robot4);
 //		gameMaster.startGame();
 
 		//test if gamemaster loads a save

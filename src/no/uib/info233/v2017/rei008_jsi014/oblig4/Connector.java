@@ -2,6 +2,7 @@ package no.uib.info233.v2017.rei008_jsi014.oblig4;
 
 
 import java.sql.*;
+import java.util.HashMap;
 
 /**
  * Class to connect to a database
@@ -116,6 +117,25 @@ public class Connector {
 
 
         return gameMaster;
+    }
+
+    public HashMap<String, Float>getMultiplayerMap(HashMap<String, Float> playersMap){
+
+        try {
+            statement = getConnection().prepareStatement("SELECT player_1, player, score FROM open_games, oblig4.ranking WHERE player_1 = player");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+
+                playersMap.put(result.getString(1), result.getFloat(3));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return playersMap;
     }
 
 }
