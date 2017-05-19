@@ -44,7 +44,7 @@ public class NewWindow extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        FontUIResource f = new FontUIResource("Avenir", Font.BOLD, 20);
+        FontUIResource f = new FontUIResource("Calibri", Font.PLAIN, 22);
         ColorUIResource bg = new ColorUIResource(70,70,70);
         ColorUIResource fg = new ColorUIResource(255,255,255);
         Color buttonBG = new Color(120,120,120);

@@ -87,7 +87,7 @@ public class GameMaster {
 	 * Tells the players to make their first move
 	 */
 	public void startGame(){
-		TestGUI gui = new TestGUI();
+		new TestGUI();
 		setGameOver(false);
 		System.out.println(playerBlueName + " vs " + playerRedName + "\n");
 		player1.makeNextMove(player1.getCurrentPosition(), player1.getCurrentEnergy(), player2.getCurrentEnergy());

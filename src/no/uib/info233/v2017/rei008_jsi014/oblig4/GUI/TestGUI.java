@@ -25,7 +25,6 @@ public class TestGUI {
 
     public TestGUI() {
         createPlayerNameFrame();
-        //createMultiplayerFrame();
     }
 
 
@@ -72,7 +71,8 @@ public class TestGUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    playerName = playerNameTextField.getText();
+                    if(!playerNameTextField.getText().equals(""))
+                        playerName = playerNameTextField.getText();
                     createMainFrame();
                     playerNameFrame.dispose();
                 }
