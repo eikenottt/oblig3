@@ -119,15 +119,16 @@ public class Connector {
         return gameMaster;
     }
 
-    public HashMap<String, Float>getMultiplayerMap(HashMap<String, Float> playersMap){
-
+    public HashMap<String, HashMap<String,Float>> getMultiplayerMap(HashMap<String, Float> playersMap){
+        HashMap< String, HashMap<String, Float>> multiplayerMap = new HashMap<>();
         try {
-            statement = getConnection().prepareStatement("SELECT player_1, player, score FROM open_games, oblig4.ranking WHERE player_1 = player");
+            statement = getConnection().prepareStatement("SELECT player_1, player_1_random, player, score FROM open_games, oblig4.ranking WHERE player_1 = player");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
 
-                playersMap.put(result.getString(1), result.getFloat(3));
+                playersMap.put(result.getString(1), result.getFloat(4));
+                multiplayerMap.put(result.getString(2), playersMap);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +136,7 @@ public class Connector {
             e.printStackTrace();
         }
 
-        return playersMap;
+        return multiplayerMap;
     }
 
 }

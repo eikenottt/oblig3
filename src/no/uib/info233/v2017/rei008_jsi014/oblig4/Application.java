@@ -28,10 +28,13 @@ public class Application {
 //		gameMaster.setPlayers(robot1, robot2);
 //		gameMaster.startGame();
 
-		HashMap<String, Float> Heisveis = conn.getMultiplayerMap(new HashMap<String, Float>());
-		for (String player: Heisveis.keySet()){
-			System.out.println(player + " " + Heisveis.get(player));
-		}
+		HashMap<String, HashMap<String, Float>> heisveis = conn.getMultiplayerMap(new HashMap<String, Float>());
+		for (String player: heisveis.keySet()){
+
+            for (String playerName: heisveis.get(player).keySet()) {
+                System.out.println(player + " " + playerName + " " + heisveis.get(player).get(playerName));
+            }
+        }
 //		gameMaster.setPlayers(robot3, robot4);
 //		gameMaster.startGame();
 
