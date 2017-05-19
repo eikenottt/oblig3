@@ -196,6 +196,14 @@ public class GameMaster {
 			e.printStackTrace();
 		}
 	}
+
+	public Player getSpecificPlayer(int playerNumber){
+		if(playerNumber == 2){
+			return this.player2;
+		}else{
+			return this.player1;
+		}
+	}
 	
 	/**
 	 * @return the gameOver
