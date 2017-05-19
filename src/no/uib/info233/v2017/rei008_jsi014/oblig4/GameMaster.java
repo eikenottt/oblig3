@@ -3,6 +3,7 @@ package no.uib.info233.v2017.rei008_jsi014.oblig4;
 
 import com.sun.xml.internal.bind.v2.TODO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +23,7 @@ public class GameMaster {
 
 	// ArrayList containing the two positions where the game ends
 	private final ArrayList<Integer> GOAL = new ArrayList<>(2);
+	private int gamePosition;
 
 	// Players energy use
 	private int p1_energyUse;
@@ -37,6 +39,9 @@ public class GameMaster {
 
 	// Is made to see if both players did run the listenToPlayerMove method
 	private int playerHasRun = 0;
+
+	//Connector used to communicate with the database
+	private Connector conn = new Connector();
 
 
 
@@ -71,6 +76,10 @@ public class GameMaster {
 
 	public void setGameID(String gameID) {
 		this.gameID = gameID;
+	}
+
+	public void setGamePosition(int gamePosition){
+		this.gamePosition = gamePosition;
 	}
 	
 	/**
@@ -202,6 +211,14 @@ public class GameMaster {
 		return gameID;
 	}
 
+	public static String getPlayerBlueName() {
+		return playerBlueName;
+	}
+
+	public static String getPlayerRedName() {
+		return playerRedName;
+	}
+
 	/**
 	 * @return the p1_energyUse
 	 */
@@ -264,12 +281,22 @@ public class GameMaster {
 			return player2.getName();
 		}
 	}
-	public void loadGame(){
-		//TODO MAke this method load a saved game
+	public void loadGame(String gameID){
+
+		GameMaster loadedGameMaster = null;
+		try {
+			loadedGameMaster = conn.loadSaved(gameID);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.gameID = loadedGameMaster.gameID;
+		this.player1 = loadedGameMaster.player1;
+		this.player2 = loadedGameMaster.player2;
+		this.gamePosition = loadedGameMaster.gamePosition;
 	}
 
 	public void saveGame(){
-		//TODO make this method save a game ()
+		conn.updateSavedGame(gameID, player1, player2, gamePosition);
 	}
 
 	public void hostGame(){

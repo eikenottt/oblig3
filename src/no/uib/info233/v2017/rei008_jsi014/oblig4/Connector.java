@@ -60,30 +60,62 @@ public class Connector {
 
     }
 
-    public void loadSaved(GameMaster gameMaster){
-//        try {
-//            statement = getConnection().prepareStatement("SELECT ROW FROM oblig4.saved_games WHERE game_id="+gameMaster.getGameID()+"");
-//            ResultSet rs = statement.executeQuery();
-//            String id = rs.getString(1);
-//            gameMaster.setGameID(id);
-//
-//            String p1 = rs.getString(2);
-//            String p2 = rs.getString(3);
-//            Player player1 =  new HumanPlayer(p1);
-//            Player player2 = new PassivePlayer(p2);
-//            int p1Energy = rs.getInt(5);
-//            int p2Energy = rs.getInt(6);
-//            player1.setCurrentEnergy(p1Energy);
-//            player2.setCurrentEnergy(p2Energy);
-//            gameMaster.setPlayers(player1, player2);
-//
-//            int gamePos = rs.getInt(4);
-//            gameMaster.set
+    public GameMaster loadSaved(String gameID)throws SQLException{
+
+        Statement stmt = null;
+        String query = "SELECT game_id, player_1, player_2, game_position," +
+                        "player_1_energy, player_2_energy" +
+                        "FROM saved_games WHERE game_id = 'gameID'";
+
+        GameMaster gameMaster = new GameMaster();
+        try {
+
+            statement = getConnection().prepareStatement("SELECT * FROM saved_games WHERE game_id = ?");
+            statement.setString(1, gameID);
+            ResultSet rs = statement.executeQuery();
+
+                rs.next();
+                String id = rs.getString("game_id");
+                gameMaster.setGameID(id);
+
+                rs.next();
+                String p1 = rs.getString("player_1");
+                rs.next();
+                String p2 = rs.getString("player_2");
+                rs.next();
+
+                rs.next();
+                int gamePos = rs.getInt("game_position");
+                gameMaster.setGamePosition(gamePos);
+
+
+                int p1Energy = rs.getInt("player_1_energy");
+                rs.next();
+                int p2Energy = rs.getInt("player_2_energy");
+                Player player1 = new HumanPlayer(p1);
+                Player player2 = new HumanPlayer(p2);
+
+                player1.setCurrentEnergy(p1Energy);
+                player2.setCurrentEnergy(p2Energy);
+
+
+                gameMaster.setPlayers(player1, player2);
+
+
+                System.out.println("Loaded:  \n ID: " + id + " \n Player 1: " + p1 + " With " +p1Energy+ " Energy." +"\n Player 2: " +p2+ " With " + p2Energy + " Energy.");
+
+                return gameMaster;
 
 
 
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+            } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return gameMaster;
     }
+
 }

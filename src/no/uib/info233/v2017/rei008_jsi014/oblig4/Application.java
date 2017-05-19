@@ -17,13 +17,23 @@ public class Application {
 		Player robot4 = new PassivePlayer("Karl");
 		String gameid = "ostekuler";
 
-		conn.updateSavedGame(gameid, robot1, robot2, 2);
+//		conn.updateSavedGame(gameid, robot1, robot2, 2);
 
 		gameMaster.setPlayers(robot1, robot2);
-		gameMaster.startGame();
+//		gameMaster.startGame();
 
 		gameMaster.setPlayers(robot3, robot4);
-		gameMaster.startGame();
+//		gameMaster.startGame();
+
+		//test if gamemaster loads a save
+
+
+		GameMaster savedGameMaster = new GameMaster();
+		savedGameMaster.loadGame("ostekuler");
+		System.out.println(savedGameMaster.getGameID()+ "Game Loaded " );
+		System.out.println("Player 1: " + savedGameMaster.getPlayerBlueName() + " Player 2: " + savedGameMaster.getPlayerRedName());
 	}
+
+
 
 }
