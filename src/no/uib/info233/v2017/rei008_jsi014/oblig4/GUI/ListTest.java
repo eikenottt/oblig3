@@ -1,29 +1,33 @@
 package no.uib.info233.v2017.rei008_jsi014.oblig4.GUI;
 
+import no.uib.info233.v2017.rei008_jsi014.oblig4.Connector;
+import no.uib.info233.v2017.rei008_jsi014.oblig4.GameMaster;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Callable;
 
 /**
  * Created by runeeikemo on 12.05.2017.
  */
-public class ListTest extends JComponent {
+class ListTest extends JComponent {
 
     private JPanel m;
     private ArrayList<ArrayList<JComponent>> array = new ArrayList<>();
     private HashMap<String, Float> players = new HashMap<>();
+    private HashMap<String, HashMap<String, Float>> playerMap = new HashMap<>();
+    private final String[] playerName = new String[0];
 
     JPanel ytterst = new JPanel(new BorderLayout());
 
     public ListTest() {
-        players.put("Rune", 20f);
-        players.put("John", 10.75f);
-        players.put("Kalle", 8.25f);
-        players.put("Kåre", 0f);
-        players.put("Vegard", -2.5f);
-        players.put("Malin", 29.75f);
+        populateMiltiplayerTable();
     }
 
     public JPanel getPanel() {
@@ -71,15 +75,32 @@ public class ListTest extends JComponent {
         }
     }
 
-    private void getFromStuff() {
-
-        for (String name : players.keySet()) {
-            ArrayList<JComponent> array2 = new ArrayList<>();
-            array2.add(new JLabel(name));
-            array2.add(new JLabel(players.get(name).toString(), JLabel.CENTER));
-            array2.add(new JButton("Join"));
-            array.add(array2);
+    private String getFromStuff() {
+        for (String player_id : playerMap.keySet()) {
+            for(String playername : playerMap.get(player_id).keySet()) {
+                ArrayList<JComponent> array2 = new ArrayList<>();
+                array2.add(new JLabel(playername));
+                array2.add(new JLabel(players.get(playername).toString(), JLabel.CENTER));
+                array2.add(new JButton(new AbstractAction("Join") {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        playerName[0] = playername;
+                    }
+                }));
+                array.add(array2);
+            }
         }
+        return playerName[0];
+    }
+
+    private void populateMiltiplayerTable () {
+
+        Connector conn = new Connector();
+        playerMap = conn.getMultiplayerMap(players);
+    }
+
+    public String getPlayerName() {
+        return playerName[0];
     }
 
 

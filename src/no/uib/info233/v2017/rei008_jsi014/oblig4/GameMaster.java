@@ -69,8 +69,8 @@ public class GameMaster {
 	public void setPlayers(Player playerBlue, Player playerRed) {
 		player1 = playerBlue;
 		player2 = playerRed;
-		playerBlueName = getPlayerName(playerBlue);
-		playerRedName = getPlayerName(playerRed);
+		playerBlueName = playerBlue.getName();
+		playerRedName = playerRed.getName();
 		playerBlue.registerGameMaster(this);
 		playerRed.registerGameMaster(this);
 	}
@@ -87,7 +87,6 @@ public class GameMaster {
 	 * Tells the players to make their first move
 	 */
 	public void startGame(){
-		new TestGUI();
 		setGameOver(false);
 		System.out.println(playerBlueName + " vs " + playerRedName + "\n");
 		player1.makeNextMove(player1.getCurrentPosition(), player1.getCurrentEnergy(), player2.getCurrentEnergy());
@@ -100,11 +99,10 @@ public class GameMaster {
 	 * @param player player
 	 * @param energyUse energyUse
 	 */
-	public void listenToPlayerMove(Player player, int energyUse) {
+	public String listenToPlayerMove(Player player, int energyUse) {
 
+		String output = "";
 		if(!gameOver) {
-			
-			System.out.println(getPlayerName(player) + " is using " + energyUse + " energy to swing its sword!.");
 			
 			if(player.equals(player1)) {
 				this.p1_energyUse = energyUse;
@@ -115,14 +113,16 @@ public class GameMaster {
 
 		} else {
 			if(playerHasRun > 0) {
-				evaluateTurn();
+				output = evaluateTurn();
 				playerHasRun = 0;
 			}
 		}
 
 		if(this.p1_energyUse > -1 && this.p2_energyUse > -1) {
-			evaluateTurn();
+			output = evaluateTurn();
 		}
+
+		return output;
 	}
 	
 	/**
@@ -130,7 +130,9 @@ public class GameMaster {
 	 * listenToPlayerMove() to figure out who won the round.
 	 * When game is over, it runs the updateRanking method
 	 */
-	private void evaluateTurn() {
+	private String evaluateTurn() {
+
+		String output = "";
 
 		if(!gameOver) {
 
@@ -138,16 +140,16 @@ public class GameMaster {
 				this.player1.updatePosition(1);
 				this.player2.updatePosition(-1);
 				
-				System.out.println(playerBlueName + " won!" + "\n");
+				output = playerBlueName + " won!" + "\n";
 												
 			}else if(getP1_energyUse() == getP2_energyUse()) {
-				System.out.println("DRAW!!!!" + "\n");
+				output ="DRAW!!!!" + "\n";
 			}
 			else {
 				this.player1.updatePosition(-1);
 				this.player2.updatePosition(1);
 				
-				System.out.println(playerRedName + " won!" + "\n");
+				output = playerRedName + " won!" + "\n";
 			}
 			
 			System.out.println(playerBlueName + " at position: " + player1.getCurrentPosition());
@@ -172,6 +174,8 @@ public class GameMaster {
 		else {
 			updateRanking();
 		}
+
+		return output;
 	}
 
 	/**
@@ -328,6 +332,5 @@ public class GameMaster {
 
 
 	}
-
 }
 

@@ -6,6 +6,8 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 
 /**
@@ -26,6 +28,7 @@ public class NewWindow extends JFrame {
 
         setLocation(xPos, yPos);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
     }
 
     public void setDefaultClose(int CLOSE) {
@@ -35,13 +38,7 @@ public class NewWindow extends JFrame {
     private void setUI() {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
         FontUIResource f = new FontUIResource("Calibri", Font.PLAIN, 22);
@@ -77,6 +74,9 @@ public class NewWindow extends JFrame {
                         UIManager.put(key, buttonBG);
                     if(key.toString().contains("OptionPane.messageForeground")) {
                         UIManager.put(key, fg);
+                    }
+                    if(key.toString().contains("ProgressBar.foreground")) {
+                        UIManager.put(key, ColorUIResource.RED);
                     }
                 }
             }

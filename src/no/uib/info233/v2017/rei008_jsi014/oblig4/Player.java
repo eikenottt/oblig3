@@ -154,7 +154,7 @@ public abstract class Player {
 	 * @param yourEnergy - the energy the player has available
 	 * @return int energy to spend
 	 */
-    protected int overheadSwing(int yourEnergy){
+	public int overheadSwing(int yourEnergy){
         int randNumber;
         randNumber = rand.nextInt(15);
 
@@ -170,7 +170,7 @@ public abstract class Player {
 	 * @param yourEnergy - the energy the player has available
 	 * @return int energy to spend
 	 */
-	protected int stab(int yourEnergy){
+	public int stab(int yourEnergy){
 
         int randNumber;
         randNumber = this.rand.nextInt(50);
@@ -190,7 +190,7 @@ public abstract class Player {
 	 * @param yourEnergy - the energy the player has available
 	 * @return int energy to spend
 	 */
-    protected int slash(int yourEnergy){
+	public int slash(int yourEnergy){
 
         int randNumber = this.rand.nextInt(15);
         if (yourEnergy > 20) {

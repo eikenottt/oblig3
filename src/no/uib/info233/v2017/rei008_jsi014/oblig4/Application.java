@@ -3,6 +3,7 @@ package no.uib.info233.v2017.rei008_jsi014.oblig4;
 import no.uib.info233.v2017.rei008_jsi014.oblig4.GUI.TestGUI;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -14,27 +15,20 @@ public class Application {
 	
 	public static void main(String[] args) throws Exception {
 
-		GameMaster gameMaster = new GameMaster();
-		Connector conn = new Connector();
+		SwingUtilities.invokeLater(() -> new TestGUI());
 
-		Player robot1 = new AggressivePlayer("Cato");
+
+
+		/*Player robot1 = new AggressivePlayer("Cato");
 		Player robot2 = new PassivePlayer("Svein");
 		Player robot3 = new AggressivePlayer("Nora");
 		Player robot4 = new PassivePlayer("Karl");
-		String gameid = "ostekuler";
+		String gameid = "ostekuler";*/
 
 //		conn.updateSavedGame(gameid, robot1, robot2, 2);
 
 //		gameMaster.setPlayers(robot1, robot2);
-//		gameMaster.startGame();
 
-		HashMap<String, HashMap<String, Float>> heisveis = conn.getMultiplayerMap(new HashMap<String, Float>());
-		for (String player: heisveis.keySet()){
-
-            for (String playerName: heisveis.get(player).keySet()) {
-                System.out.println(player + " " + playerName + " " + heisveis.get(player).get(playerName));
-            }
-        }
 //		gameMaster.setPlayers(robot3, robot4);
 //		gameMaster.startGame();
 
